@@ -27,7 +27,7 @@ I, Tools
 II, Techniques
 1_FrontEnd
 + HTML5;
-+ CSS3.
++ CSS3
 
 2_BackEnd
 + C#;
