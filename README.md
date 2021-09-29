@@ -1,6 +1,7 @@
 # PRN211_LibrarySystem
 
 A. INTRODUCTION
+
 I, Idea
 + Nowadays, internet access has become popular because of the strong development of information technology;
 + The library has become a second lecture hall for students, where they can borrow books to look up and return books on time. 
