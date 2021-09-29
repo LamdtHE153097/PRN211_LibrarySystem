@@ -37,27 +37,47 @@ II, Techniques
 C. USERS CLASSES AND CHARACTERISTICS
 
 I, Librarian
+
 - With Librarian we have 12 main features:
+
 •	Login, Logout
+
 •	Add publication (Nhà xuất bản)
+
 •	Add book
+
 •	View book report
+
 •	Add branch (Chi nhánh)
+
 •	Add student
+
 •	View student report
+
 •	Issue book (Ngày cho mượn sách)
+
 •	Issue report (Lịch sử cho mượn sách)
+
 •	Return book (Ngày trả sách)
+
 •	Penalty (Phạt nếu sinh viên trả sách muộn quá thời hạn)
 
 II, Student
+
 - With Student we have 8 main features:
+
 •	Login, Logout
+
 •	View Account
+
 •	Edit Account
+
 •	Change password
+
 •	My report (List sách đang mượn và sách đã trả)
+
 •	Penalty report (Lịch sử phạt do trả sách quá kỳ hạn)
+
 •	View book (Xem các sách đang có sẵn)
 
 *****************************************************************************************************************************
