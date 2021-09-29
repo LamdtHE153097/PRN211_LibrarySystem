@@ -84,7 +84,7 @@ II, Student
 *****************************************************************************************************************************
 @CONTRIBUTE:
 + ĐINH TIẾN LÂM (HE153097);
-+ NGÔ TRUNG HUY ();
-+ NGUYÊN NAM PHƯƠNG ();
-+ NGUYỄN TRUNG KIÊN ();
-+ NGUYỄN ĐÌNH TRUNG ĐỨC ();
++ NGÔ QUANG HUY (HE153653);
++ NGUYÊN NAM PHƯƠNG (HE153074);
++ NGUYỄN TRUNG KIÊN (HE153296);
++ NGUYỄN ĐÌNH TRUNG ĐỨC (HE153148);
