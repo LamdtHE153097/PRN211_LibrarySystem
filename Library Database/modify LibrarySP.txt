@@ -1,0 +1,1022 @@
+USE [LibrarySystem]
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_UPDATE] */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_UPDATE]
+@PID AS INT,
+	@PNAME AS NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	UPDATE PublicationMst SET PUBLICATION= @PNAME WHERE PID=@PID
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_SELECT_BY_PNAME]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_SELECT_BY_PNAME]
+	@PNAME AS NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PublicationMst WHERE Publication=@PNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_SELECT_BY_PID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_SELECT_BY_PID]
+	@PID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PublicationMst WHERE PID=@PID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PublicationMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_INSERT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_INSERT]
+	@PNAME AS NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	INSERT INTO PublicationMst VALUES(@PNAME,GETDATE())
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PUBLICATION_DELETE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PUBLICATION_DELETE]
+@PID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+DELETE FROM PublicationMst WHERE PID=@PID
+	
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_UPDATE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_UPDATE]
+	@SID AS INT,
+	@STUDENTNAME AS NVARCHAR(256),
+	@BRANCHNAME AS NVARCHAR(256),
+	@MOBILE AS NVARCHAR (256),
+	@ADD AS NVARCHAR(256),
+	@CITY AS NVARCHAR(256),
+	@PINCODE AS NVARCHAR(256)
+
+    
+AS
+BEGIN
+	
+UPDATE StudentMst SET StudentName=@STUDENTNAME, Email=@BRANCHNAME, Mobile=@MOBILE, Address=@ADD, City=@CITY, Pincode=@PINCODE  WHERE SID=@SID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_SEARCH]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[STUDENT_SELECT_SEARCH]
+	@name as nvarchar(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst where StudentName like @name
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_RENT_BOOK]  */    
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_SELECT_RENT_BOOK]
+	
+	@STATUS AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT distinct s.sid as SID,s.StudentName as StudentName FROM RentMst as r, StudentMst as s where Status=@STATUS and s.SID=r.SID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_LOGIN]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[STUDENT_SELECT_LOGIN]
+@EMAIL AS  NVARCHAR(256),
+@pass as nvarchar(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst WHERE Email=@EMAIL and Password=@pass
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_BY_SID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_SELECT_BY_SID]
+@SID AS INT	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst WHERE SID=@SID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_BY_EMAIL]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_SELECT_BY_EMAIL]
+@EMAIL AS  NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst WHERE Email=@EMAIL
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT_BY_branch]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[STUDENT_SELECT_BY_branch]
+@branch AS  NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst WHERE BranchName=@branch
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	SELECT * FROM StudentMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_INSERT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_INSERT]
+	@STUDENTNAME AS NVARCHAR(256),
+	@BRANCHNAME AS NVARCHAR(256),
+	@MOBILE AS NVARCHAR (256),
+	@ADD AS NVARCHAR(256),
+	@CITY AS NVARCHAR(256),
+	@PINCODE AS NVARCHAR(256),
+	@DOB AS DATETIME,
+	@GENDER AS NVARCHAR(256),
+	@EMAIL AS  NVARCHAR (256),
+	@pass as nvarchar(256),
+	@img as nvarchar(500)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+
+	INSERT INTO StudentMst VALUES (@STUDENTNAME, @BRANCHNAME ,@MOBILE , @ADD , @CITY , @PINCODE , @DOB, @GENDER , @EMAIL,@pass,@img,GETDATE()) 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_DELETE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[STUDENT_DELETE]
+	@SID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+		DELETE FROM StudentMst WHERE SID=@SID
+
+   
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[STUDENT_change_password]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[STUDENT_change_password]
+	@sid as int,
+	@pass as nvarchar(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+update StudentMst set password=@pass where SID=@sid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_SID_STATUS]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_SID_STATUS]
+	@sid as int,
+	@status as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where SID=@sid and Status=@status
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_SID_and_BNAME_and_STATUS]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_SID_and_BNAME_and_STATUS]
+	@BNAME AS NVARCHAR(256),
+	@sid as int,
+	@status as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where BookName=@BNAME and SID=@sid and Status=@status
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_SID_and_BNAME]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_SID_and_BNAME]
+	@BNAME AS NVARCHAR(256),
+	@sid as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where BookName=@BNAME and SID=@sid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_SID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_SID]
+	@SID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where SID=@SID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_RID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_RID]
+	@rid as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where RID=@rid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_RETURN]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_SELECT_RETURN]
+	@RID AS INT,
+	@STATUS AS INT,
+	@bid as  int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	 UPDATE RentMst SET Status=@STATUS, ReturnDate=GETDATE() WHERE RID=@RID
+	 update BookMst set AvailableQnt=AvailableQnt+1,RentQnt=RentQnt-1 where BookID=@bid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BY_STATUS_AND_SID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_BY_STATUS_AND_SID]
+	@SID AS INT,
+	@STATUS AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where SID=@SID AND  Status=@STATUS
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BY_STATUS]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_BY_STATUS]
+	@STATUS AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where Status=@STATUS
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BOOKNAME]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_BOOKNAME]
+	@BNAME AS NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst where BookName=@BNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BOOK_RENT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_BOOK_RENT]
+	@sid  as  int,
+	@STATUS AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT  * FROM RentMst   where SID=@sid and  Status=@STATUS  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM RentMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_INSERT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_INSERT]
+	
+	@BNAME AS NVARCHAR(256),
+	@SID AS INT,
+	@DAYS AS INT
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	INSERT INTO RentMst VALUES (@BNAME,@SID,@DAYS,GETDATE(),NULL,0)
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_DELETE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_DELETE]
+	@RID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+		DELETE FROM RentMst WHERE RID=@RID
+
+   
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_FOR_PAY]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[PENALTY_SELECT_FOR_PAY]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	select * from StudentMst where SID in( SELECT SID FROM PenaltyMst where Panalty=0)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_BY_SID_book]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[PENALTY_SELECT_BY_SID_book]
+@SID AS INT,
+@book as nvarchar(500)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst WHERE SID=@SID and BookName=@book
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_BY_SID_and_Panalty_0]  */    
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[PENALTY_SELECT_BY_SID_and_Panalty_0]
+@SID AS INT	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst WHERE SID=@SID and Panalty=0
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_BY_SID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_SELECT_BY_SID]
+@SID AS INT	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst WHERE SID=@SID  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_BY_PID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_SELECT_BY_PID]
+@PID AS INT	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst WHERE PID=@PID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT_BY_BNAME]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_SELECT_BY_BNAME]
+@BNAME AS NVARCHAR(256)	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst WHERE BookName=@BNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM PenaltyMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_PAY_NOW]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[PENALTY_PAY_NOW]
+@panalty as float,
+@detail as nvarchar(500),
+@pid as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+update PenaltyMst set Panalty=@panalty,Detail=@detail, EntryDate=GETDATE() where  PID=@pid
+	--SELECT * FROM PenaltyMst WHERE SID=@SID and Panalty=0
+END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_INSERT] */     
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_INSERT]
+	
+	
+	@SID AS INT,
+	@bname as nvarchar(256),
+	@price as float,
+	@panalty as float,
+	@detail as nvarchar(500)
+ 
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	INSERT INTO PenaltyMst VALUES (@SID,@bname,@price,@panalty,@detail,GETDATE())
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[PENALTY_DELETE]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[PENALTY_DELETE]
+	@PID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+		DELETE FROM PenaltyMst WHERE PID=@PID
+
+   
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_UPDATE]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_UPDATE]
+	@BID AS INT,
+	@BRANCHNAME AS NVARCHAR(256)
+	
+	
+AS
+BEGIN
+UPDATE BranchMst SET BranchName= @BRANCHNAME WHERE BranchID=@BID
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_SELECT_BY_BNAME]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_SELECT_BY_BNAME]
+@BNAME AS NVARCHAR(256)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BranchMst WHERE BranchName=@BNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_SELECT_BY_BID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_SELECT_BY_BID]
+@BID AS INT	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BranchMst WHERE BranchID=@BID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BranchMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_INSERT]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_INSERT]
+	
+	@BRANCHNAME AS NVARCHAR(256)
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	INSERT INTO BranchMst VALUES (@BRANCHNAME)
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[BRANCH_DELETE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BRANCH_DELETE]
+	@BRANCHID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+		DELETE FROM BranchMst WHERE BRANCHID=@BRANCHID
+
+   
+	 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ADMIN_SELECT_FOR_LOGIN]  */    
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[ADMIN_SELECT_FOR_LOGIN]
+	@uname as nvarchar(256),
+	@pass as nvarchar(256)
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	SELECT * FROM AdminMst where UserName=@uname and Password=@pass
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[ADMIN_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ADMIN_SELECT]
+	
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	SELECT * FROM AdminMst
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[ADMIN_INSERT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ADMIN_INSERT]
+	
+	@NAME AS NVARCHAR(256),
+	@UNAME AS NVARCHAR(256),
+	@PASS AS NVARCHAR(256)
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	INSERT INTO AdminMst VALUES (@NAME,@UNAME,@PASS,GETDATE())
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[ADMIN_DELETE]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ADMIN_DELETE]
+	
+	@AID AS INT
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	DELETE FROM AdminMst WHERE AID=@AID
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[ADMIN_changepassword]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[ADMIN_changepassword]
+	
+	@aid as int,
+	@PASS AS NVARCHAR(256)
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  
+	update AdminMst set password=@pass where aid=@aid
+	
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_UPDATE]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[BOOK_UPDATE]
+@bid as int,
+  	@BNAME AS NVARCHAR(256),
+	@AUTHOR AS NVARCHAR(256),
+	@DETAIL AS NVARCHAR(256),
+	@PRICE AS FLOAT ,
+	@PUBLICATION AS NVARCHAR(256),
+	@BRANCH AS NVARCHAR(256), 	
+    @img as nvarchar(1000)
+AS
+BEGIN
+
+
+ update BookMst set BookName=@BNAME,Author=@AUTHOR,Detail=@DETAIL, Price=@PRICE, Publication =@PUBLICATION , Branch=@BRANCH, Image=@img where BookID=@bid
+
+    
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_SELECT_By_PUBLICATION]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_SELECT_By_PUBLICATION]
+	
+@PUB AS NVARCHAR(200)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BookMst where Publication=@PUB
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_SELECT_By_BRANCH]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_SELECT_By_BRANCH]
+	
+@BRANCH AS NVARCHAR(200)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BookMst where Branch=@BRANCH
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_SELECT_By_BNAME]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[BOOK_SELECT_By_BNAME]
+	
+@BNAME AS NVARCHAR(200)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BookMst where BookName=@BNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_SELECT_By_BID]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[BOOK_SELECT_By_BID]
+	
+	@bid as int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BookMst where BookID=@bid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_SELECT]    */  
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_SELECT]
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT * FROM BookMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_ISSUE_TO_STUDENT]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_ISSUE_TO_STUDENT]
+	@BID  AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	UPDATE BookMst SET AvailableQnt=AvailableQnt-1, RentQnt=RentQnt+1 WHERE BookID=@BID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_INSERT]   */   
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_INSERT]
+  	@BNAME AS NVARCHAR(256),
+	@AUTHOR AS NVARCHAR(256),
+	@DETAIL AS NVARCHAR(256),
+	@PRICE AS FLOAT ,
+	@PUBLICATION AS NVARCHAR(256),
+	@BRANCH AS NVARCHAR(256), 
+	@QUANTITIES AS INT ,
+    @AVAILABLEQNT AS INT ,
+    @RENTQNT AS INT,
+    @img as nvarchar(1000)
+    
+AS
+BEGIN
+
+
+	SET NOCOUNT ON;
+	INSERT INTO BookMst VALUES (@BNAME,@AUTHOR ,@DETAIL , @PRICE, @PUBLICATION , @BRANCH , @QUANTITIES , @AVAILABLEQNT,@RENTQNT,@img,GETDATE() )
+
+    
+END
+GO
+/****** Object:  StoredProcedure [dbo].[BOOK_DELETE]  */    
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[BOOK_DELETE]
+	@BOOKID AS INT
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+		DELETE FROM BookMst WHERE BOOKID=@BOOKID
+
+   
+	 
+END
+GO
