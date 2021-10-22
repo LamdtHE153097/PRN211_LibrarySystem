@@ -32,7 +32,7 @@ II, Techniques
 2_BackEnd
 + C#;
 + SQL Server;
-+ ASP.NET webform
++ Entity Frame Word with MVC.Net
 
 C. USERS CLASSES AND CHARACTERISTICS
 
@@ -80,6 +80,8 @@ II, Student
 •	Penalty report (Lịch sử phạt do trả sách quá kỳ hạn)
 
 •	View book (Xem các sách đang có sẵn)
+
+•   Borrow book with exact day expire
 
 *****************************************************************************************************************************
 @CONTRIBUTE:
