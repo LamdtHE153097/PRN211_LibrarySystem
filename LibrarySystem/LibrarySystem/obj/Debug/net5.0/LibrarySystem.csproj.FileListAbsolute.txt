@@ -1,8 +1,0 @@
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.csproj.AssemblyReference.cache
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.GeneratedMSBuildEditorConfig.editorconfig
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.AssemblyInfoInputs.cache
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.AssemblyInfo.cs
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.csproj.CoreCompileInputs.cache
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.MvcApplicationPartsAssemblyInfo.cache
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.RazorAssemblyInfo.cache
-E:\C#\PRN211_LibrarySystem\LibrarySystem\LibrarySystem\obj\Debug\net5.0\LibrarySystem.RazorAssemblyInfo.cs
