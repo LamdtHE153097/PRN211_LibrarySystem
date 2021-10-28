@@ -26,5 +26,12 @@ namespace LibraryAsp.Controllers
             category.add(pub);
             return RedirectToAction("Index", new { msg = "1" });
         }
+        public ActionResult Add(FormCollection form)
+        {
+            Category pub = new Category();
+            pub.name = form["name"];
+            category.add(pub);
+            return RedirectToAction("Index", new { msg = "1" });
+        }
     }
 }
