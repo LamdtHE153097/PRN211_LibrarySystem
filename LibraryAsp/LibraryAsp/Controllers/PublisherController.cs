@@ -26,13 +26,6 @@ namespace LibraryAsp.Controllers
             publisher.add(pub);
             return RedirectToAction("Index", new { msg = "1" });
         }
-        public ActionResult Add(FormCollection form)
-        {
-            Publisher pub = new Publisher();
-            pub.name = form["name"];
-            publisher.add(pub);
-            return RedirectToAction("Index", new { msg = "1" });
-        }
         /*   [HttpPost]
            public ActionResult Update(FormCollection form)
            {
