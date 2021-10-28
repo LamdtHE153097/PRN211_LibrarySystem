@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h4 class="mt-1">Sửa Thông tin sinh viên</h4>
+
+        <div class="card mb-4">
+            @if (ViewBag.mes != null)
+            {
+                <div class="alert alert-success">
+                    <strong>Cập nhật thông tin thành công</strong>
+                </div>
+            }
+            <div class="card-body">
+                <form enctype="multipart/form-data" action="/User/EditPost" method="post">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Họ và tên :</label>
+                                <input type="text" class="form-control" id="tenphim" name="fullname" tabindex="1" value="@ViewBag.list.fullname" required maxlength="20">
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Giới tính:</label>
+                                <select class="form-select" aria-label="Default select example" id="nganhhang" tabindex="8" name="gender" required>
+                                    @if (ViewBag.list.gender == 1)
+                                    {
+                                        <option value="@ViewBag.list.gender" selected>Nam</option>
+                                        <option value="0">Nữ</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@ViewBag.list.gender" selected>Nữ</option>
+                                        <option value="1">Nam</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Số điện thoại :</label>
+                                <input type="text" class="form-control" id="dienvien" value="@ViewBag.list.phone" name="phone" tabindex="2" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Địa chỉ:</label>
+                                <input type="text" class="form-control" id="tenphim" name="address" value="@ViewBag.list.address" tabindex="1" required maxlength="20">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Email :</label>
+                                <input type="text" class="form-control" id="tenphim" name="email" tabindex="1" readonly value="@ViewBag.list.email" required maxlength="20">
+                            </div>
+                            @{
+                                string dateS = String.Format("{0:yyyy-MM-dd}", @ViewBag.list.birthday);
+                            }
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Ngày sinh :</label>
+                                <input type="date" class="form-control" id="tenphim" name="birthday" value="@dateS" tabindex="1" required maxlength="20">
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+
+                            <button style="width:100px" type="submit" class="btn btn-primary">Sửa </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+

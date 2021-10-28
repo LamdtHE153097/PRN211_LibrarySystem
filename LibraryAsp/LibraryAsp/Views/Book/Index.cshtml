@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh sách Sách ở Thư viện</h1>
+
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.Msg == "1")
+                {
+                    <div class="alert alert-success">
+                        <strong>Thành công</strong>
+                    </div>
+                }
+                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalAdd">
+                    Thêm mới
+                </button>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr style="background-color:gray">
+                            <th>STT</th>
+                            <th>Ảnh</th>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                            <th>Thể loại</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Ảnh</th>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                            <th>Thể loại</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{ var stt = 1;}
+                        @foreach (var item in ViewBag.List)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>
+                                    @{
+                                        var idModel = "exampleModalImg" + item.id_book;
+                                    }
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#@idModel">
+                                        <img style="width: 120px !important;height: 150px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                    </a>
+
+                                </td>
+                                <td>@item.name</td>
+                                <td>@item.author</td>
+                                <td>
+                                    @{var category = new LibraryAsp.Dao.CategoryDao().getAll();
+                                    }
+                                    @{var nhaxb = new LibraryAsp.Dao.PublisherDao().getAll();
+                                    }
+                                    @foreach (var item1 in category)
+                                    {
+                                        if (item1.id_category == item.id_category)
+                                        {
+                                            @item1.name;
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        var idModelDes = "exampleModalDes" + item.id_book;
+                                    }
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#@idModelDes" style="width: 100px !important">
+                                        Chi tiết
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Modal img-->
+                            <div class="modal fade" id="@idModel" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-m">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <img style="width: 460px !important;height: 580px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal img-->
+                            <div class="modal fade" id="@idModelDes" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <img style="width: 100% !important;height: 250px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách</label>
+                                                        :@item.name
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả</label>
+                                                        :@item.author
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Nhà xuất bản</label>
+                                                        : @foreach (var item2 in nhaxb)
+                                                        {
+                                                            if (item2.id_publisher == item.id_publisher)
+                                                            {
+                                                                @item2.name;
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Thể loại</label>
+                                                        : @foreach (var item1 in category)
+                                                        {
+                                                            if (item1.id_category == item.id_category)
+                                                            {
+                                                                @item1.name;
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm phát hành</label>
+                                                        : @item.year_publish
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Giá thuê</label>
+                                                        : @item.price VND
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Ngày thêm</label>
+                                                        : @item.createdAt
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;">Nội dung</label><br />
+                                                    @Html.Raw(item.description)
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Modal Add-->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/Book/Add" class="register-form" id="register-form" enctype="multipart/form-data">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film"
+                                       class="col-form-label">Tên sách:</label>
+                                <input type="text" class="form-control" id="category-film" name="name" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film"
+                                       class="col-form-label">Tác giả:</label>
+                                <input type="text" class="form-control" id="category-film" name="author" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film"
+                                       class="col-form-label">Năm phát hành:</label>
+                                <input type="number" class="form-control" id="category-film" name="yearpub" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film"
+                                       class="col-form-label">Giá thuê:</label>
+                                <input type="number" class="form-control" id="category-film" name="price" required>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Loại sách : </label>
+                                <select class="form-select" aria-label="Default select example" id="theloai" name="loaisach" required>
+                                    <option value="" selected>Chọn Loại sách</option>
+                                    @{var cate = new LibraryAsp.Dao.CategoryDao().getAll();
+                                    }
+                                    @foreach (var item1 in cate)
+                                    {
+                                        <option value="@item1.id_category">@item1.name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Nhà xuất bản : </label>
+                                <select class="form-select" aria-label="Default select example" id="theloai" name="nxb" required>
+                                    <option value="" selected>Chọn Nhà xuất bản</option>
+                                    @{var nxb = new LibraryAsp.Dao.PublisherDao().getAll();
+                                    }
+                                    @foreach (var item2 in nxb)
+                                    {
+                                        <option value="@item2.id_publisher">@item2.name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlFile1">Ảnh:</label>
+                            <input type="file" class="form-control-file mt-2" name="file" id="file" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-film"
+                                   class="col-form-label">Nội dung:</label>
+                            <textarea class="form-control" cols="30" rows="5" name="noidung"></textarea>
+                        </div>
+
+                    </div>
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">
+                                Đóng
+                            </button>
+                            <button type="submit" class="btn btn-primary">Lưu </button>
+</form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

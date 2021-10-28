@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "ListTransactionPunish";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <div class="container-fluid px-4">
+        @{ DateTime aDateTime = DateTime.Now; }
+        <div style="display:flex;justify-content:space-between">
+            <div>
+                <h1 class="mt-4">Lịch sử bị phạt</h1>
+            </div>
+            <div class="mt-5">
+                <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:yyyy-MM-dd}", @aDateTime)</span>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.mess != null)
+                {
+                    if (ViewBag.Msg == "1")
+                    {
+                        <div class="alert alert-success">
+                            <strong>Thành công</strong>
+                        </div>
+                    }
+                }
+                @{ var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];}
+
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr style="background-color: #F7F8F9; color: #0056A7 ">
+                                <th width="50px">STT</th>
+                                <th>Tên sinh viên</th>
+                                <th>Tên sách</th>
+                                <th>Ngày thuê</th>
+                                <th>Ngày trả</th>
+                                <th>Trạng thái </th>
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Date</th>
+                                <th>Showtime</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{ var index = 0;}
+                            @foreach (var item in ViewBag.list)
+                            {
+                                index += 1;
+                                <tr>
+                                    <td>@index</td>
+                                    <td>
+                                        @foreach (var item1 in ViewBag.listUser)
+                                        {
+                                            if (item1.id_user == item.id_user)
+                                            {
+                                                <p>@item1.fullname</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var item2 in ViewBag.listBook)
+                                        {
+                                            if (item2.id_book == item.id_book)
+                                            {
+                                                <p>@item2.name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@String.Format("{0:yyyy-MM-dd}", @item.start_time) </td>
+                                    <td>@String.Format("{0:yyyy-MM-dd}", @item.end_time)</td>
+
+                                  
+                                        <td><span class="badge badge-danger" style="background-color:red;font-size:12px">Bị phạt</span></td>
+                                  
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

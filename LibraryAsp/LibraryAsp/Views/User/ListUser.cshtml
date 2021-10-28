@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "ListUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh sách Sinh viên</h1>
+
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.mes == "1")
+                {
+                    <div class="alert alert-success">
+                        <strong>Thành công</strong>
+                    </div>
+                }
+                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalAdd">
+                    Thêm mới
+                </button>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr style="background-color:gray">
+                            <th>STT</th>
+                            <th>Họ Tên</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ Tên</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{ var stt = 1;}
+                        @foreach (var item in ViewBag.List)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>
+                                    @item.fullname
+                                </td>
+                                <td>
+                                    @if (item.gender == 1)
+                                    {
+                                    <span>Nam</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Nữ</span>
+                                    }
+                                </td>
+                                <td>
+                                    @String.Format("{0:yyyy-MM-dd}", @item.birthday)
+                                </td>
+                                <td>
+                                      @item.phone  
+                                </td>
+                                <td>
+                                   @item.address
+                                </td>
+                            </tr>
+                            
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Modal Add-->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/User/AddUser" class="register-form" id="register-form" enctype="multipart/form-data">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Họ và tên :</label>
+                                <input type="text" class="form-control" id="tenphim" name="fullname" tabindex="1" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Giới tính:</label>
+                                <select class="form-select" aria-label="Default select example" id="nganhhang" tabindex="8" name="gender" required>
+                                    <option value="" selected>Chọn giới tính</option>
+                                    <option value="0">Nữ</option>
+                                    <option value="1">Nam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Số điện thoại :</label>
+                                <input type="number" class="form-control" id="dienvien" name="phone" tabindex="2" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Ngày sinh :</label>
+                                <input type="date" class="form-control" id="tenphim" name="birthday" tabindex="1" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Email :</label>
+                                <input type="text" class="form-control" id="tenphim" name="email" tabindex="1" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Mật khẩu :</label>
+                                <input type="text" class="form-control" id="tenphim" name="matkhau" tabindex="1" required>
+                            </div>
+
+                        </div>
+                        <div class="">
+                            <label for="category-film" class="col-form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" id="tenphim" name="address" tabindex="1" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Đóng
+                        </button>
+                        <button type="submit" class="btn btn-primary">Lưu </button>
+                    </div>
+                </form>
+            </div>
+           
+
+            
+        </div>
+    </div>
+</div>
+
