@@ -22,35 +22,48 @@
                     Thêm mới
                 </button>
             </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr style="background-color:gray">
-                            <th>STT</th>
-                            <th>Tên Nhà Xuất Bản</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên Nhà Xuất Bản</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        @{ var stt = 1;}
-                        @foreach (var item in ViewBag.List)
-                        {
-                            <tr>
-                                <td>@stt</td>
-                                <td>@item.name</td>
+            <div class="card mb-4">
+                <div class="card-header">
+                    @if (ViewBag.Msg == "1")
+                    {
+                        <div class="alert alert-success">
+                            <strong>Thành công</strong>
+                        </div>
+                    }
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalAdd">
+                        Thêm mới
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr style="background-color:gray">
+                                <th>STT</th>
+                                <th>Tên Nhà Xuất Bản</th>
                             </tr>
-                            stt++;
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên Nhà Xuất Bản</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{ var stt = 1;}
+                            @foreach (var item in ViewBag.List)
+                            {
+                                <tr>
+                                    <td>@stt</td>
+                                    <td>@item.name</td>
+                                </tr>
+                                stt++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 </main>
 <!-- Modal Add-->
 <div class="modal fade" id="exampleModalAdd" tabindex="-1"
