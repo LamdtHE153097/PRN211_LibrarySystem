@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh sách Loại sách</h1>
+
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.Msg == "1")
+                {
+                    <div class="alert alert-success">
+                        <strong>Thành công</strong>
+                    </div>
+                }
+                <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalAdd">
+                    Thêm mới
+                </button>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr style="background-color:gray">
+                            <th>STT</th>
+                            <th>Tên Loại Sách</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên Loại Sách</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{ var stt = 1;}
+                        @foreach (var item in ViewBag.List)
+                        {
+                            <tr>
+                                <td>@stt</td>
+                                <td>@item.name</td>
+                            </tr>
+                            stt++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Modal Add-->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/Category/Add" class="register-form" id="register-form">
+                    <div class="mb-3">
+                        <label for="category-film"
+                               class="col-form-label">Loại sách:</label>
+                        <input type="text" class="form-control" id="category-film" name="name" required>
+                    </div>
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Đóng
+                    </button>
+                    <button type="submit" class="btn btn-primary">Lưu </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

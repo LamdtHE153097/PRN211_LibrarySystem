@@ -169,3 +169,10 @@ D:\.NET MVC\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.CopyComplete
 D:\.NET MVC\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.dll
 D:\.NET MVC\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.pdb
 D:\.NET MVC\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.ff.resources
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.AssemblyReference.cache
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.createdatabase.resources
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.ff.resources
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.GenerateResource.cache
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.CoreCompileInputs.cache
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.dll
+E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.pdb
