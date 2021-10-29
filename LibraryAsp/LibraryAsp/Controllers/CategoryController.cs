@@ -17,9 +17,6 @@ namespace LibraryAsp.Controllers
             ViewBag.Msg = msg;
             ViewBag.List = category.getAll();
             return View();
-            ViewBag.Msg = msg;
-            ViewBag.List = category.getAll();
-            return View();
         }
         [HttpPost]
         public ActionResult Add(FormCollection form)
