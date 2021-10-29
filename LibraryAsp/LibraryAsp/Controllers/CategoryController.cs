@@ -17,6 +17,9 @@ namespace LibraryAsp.Controllers
             ViewBag.Msg = msg;
             ViewBag.List = category.getAll();
             return View();
+            ViewBag.Msg = msg;
+            ViewBag.List = category.getAll();
+            return View();
         }
         [HttpPost]
         public ActionResult Add(FormCollection form)
@@ -26,5 +29,6 @@ namespace LibraryAsp.Controllers
             category.add(pub);
             return RedirectToAction("Index", new { msg = "1" });
         }
+
     }
 }
