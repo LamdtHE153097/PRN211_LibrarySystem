@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h4 class="mt-1">Thông tin sinh viên</h4>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <form enctype="multipart/form-data" action="/Merchant/AddNew" method="post">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Họ và tên <span style="color:red">* </span>:</label>
+                                <input type="text" class="form-control" id="tenphim" name="hoten" tabindex="1" value="@ViewBag.list.fullname" readonly required maxlength="20">
+                            </div>
+                            @if (ViewBag.list.gender == 0)
+                            {
+                                <div class="col-6">
+                                    <label for="category-film" class="col-form-label">Giới tính:</label>
+                                    <input type="text" class="form-control" id="dienvien" value="Nữ" name="sdt" tabindex="2" readonly required>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-6">
+                                    <label for="category-film" class="col-form-label">Giới tính:</label>
+                                    <input type="text" class="form-control" id="dienvien" value="Nam" name="sdt" tabindex="2" readonly required>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Số điện thoại :</label>
+                                <input type="text" class="form-control" id="dienvien" value="@ViewBag.list.phone" name="sdt" tabindex="2" readonly required>
+                            </div>
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Địa chỉ<span style="color:red">* </span>:</label>
+                                <input type="text" class="form-control" id="tenphim" name="hoten" value="@ViewBag.list.address" tabindex="1" readonly required maxlength="20">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Email :</label>
+                                <input type="text" class="form-control" id="tenphim" name="email" tabindex="1" value="@ViewBag.list.email" readonly required maxlength="20">
+                            </div>
+                            @{
+                                string dateS = String.Format("{0:yyyy-MM-dd}", @ViewBag.list.birthday);
+                            }
+                            <div class="col-6">
+                                <label for="category-film" class="col-form-label">Ngày sinh :</label>
+                                <input type="text" class="form-control" id="tenphim" name="email" value="@dateS" readonly tabindex="1" autofocus required maxlength="20">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
