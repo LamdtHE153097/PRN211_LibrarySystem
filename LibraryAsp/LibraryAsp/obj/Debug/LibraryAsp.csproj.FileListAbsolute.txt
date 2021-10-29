@@ -176,3 +176,10 @@ E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.Gen
 E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.CoreCompileInputs.cache
 E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.dll
 E:\C#\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.pdb
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.AssemblyReference.cache
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.createdatabase.resources
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.ff.resources
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.GenerateResource.cache
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.CoreCompileInputs.cache
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.dll
+F:\Semester 5\PRN292\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.pdb
