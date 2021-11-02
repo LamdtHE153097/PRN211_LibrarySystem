@@ -48,6 +48,8 @@
                         {
                             var itemName = "#exampleModalss" + item.id_category;
                             var itemName1 = "exampleModalss" + item.id_category;
+                            var deleteItem = "#delete" + item.id_category;
+                            var deleteItem1 = "delete" + item.id_category;
                             <tr>
                                 <td>@stt</td>
                                 <td>@item.name</td>
@@ -56,10 +58,9 @@
                                             data-bs-target="@itemName">
                                         Chỉnh Sửa
                                     </button>
-                                    <!-- Modal to delete information -->
-                                    <a class="btn btn-danger" onclick="ConfirmDelete(@item.id_category)">Xóa 
-                                    <i class="glyphicon-trash"></i>  </a>
-
+                                    <!-- Button to delete information -->
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="@deleteItem" 
+                                            style="width:100px" class="btn btn-danger"> Xóa</button>
                                 </td>
                             </tr>
                             stt++;
@@ -93,6 +94,38 @@
                                 </div>
                             </div>
                             @*</form>*@
+                        
+                            <!-- Modal form to delete information -->
+                            <div class="modal fade" id="@deleteItem1" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Bạn chắc chắn muốn xóa ?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            Thể loại sách : @item.name
+                                            <form action="/Category/DeleteCategory" method="post">
+                                                <input type="hidden" class="form-control" id="id" name="id" value="@item.id_category">
+                                                <div class="modal-footer" style="margin-top: 20px">
+                                                    <button style="width:100px" type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        Đóng
+                                                    </button>
+                                                    <button style="width:100px" type="submit" class="btn btn-danger"> Xóa</button>
+
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         }
                     </tbody>
                 </table>
