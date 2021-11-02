@@ -19,6 +19,7 @@
                         <strong>Thành công</strong>
                     </div>
                 }
+                <!-- Gọi đến modal add bằng data target-->
                 <button type="button" class="btn btn-info" data-bs-toggle="modal"
                         data-bs-target="#exampleModalAdd">
                     Thêm mới
@@ -30,23 +31,68 @@
                         <tr style="background-color:gray">
                             <th>STT</th>
                             <th>Tên Loại Sách</th>
+                            <th>Hành Động</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>STT</th>
                             <th>Tên Loại Sách</th>
+                            <th>Hành Động</th>
                         </tr>
                     </tfoot>
                     <tbody>
+
                         @{ var stt = 1;}
                         @foreach (var item in ViewBag.List)
                         {
+                            var itemName = "#exampleModalss" + item.id_category;
+                            var itemName1 = "exampleModalss" + item.id_category;
                             <tr>
                                 <td>@stt</td>
                                 <td>@item.name</td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                            data-bs-target="@itemName">
+                                        Chỉnh Sửa
+                                    </button>
+                                    <!-- Modal to delete information -->
+                                    <a class="btn btn-danger" onclick="ConfirmDelete(@item.id_category)">Xóa 
+                                    <i class="glyphicon-trash"></i>  </a>
+
+                                </td>
                             </tr>
                             stt++;
+                            <!-- Modal form to edit information-->
+                            @*<form action="/Category/Edit" method="post">*@
+                            <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <form action="/Category/Edit" method="post">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="">Sửa Loại Sách</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div id="resultss" class="modal-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="">
+                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên Loại Sách: </label>
+                                                            <input class="form-control" type="text" id="name" name="name" value="@item.name">
+                                                            <input class="form-control" type="hidden" id="id_category" name="id_category" value="@item.id_category" hidden>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" style="width:100px" class="btn btn-primary">Sửa</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            @*</form>*@
                         }
                     </tbody>
                 </table>
@@ -54,35 +100,39 @@
         </div>
     </div>
 </main>
-<!-- Modal Add-->
-<div class="modal fade" id="exampleModalAdd" tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-                        <div class="modal-body">
-                            <form method="POST" action="/Category/Add" class="register-form" id="register-form">
-                                <div class="mb-3">
-                                    <label for="category-film"
-                                           class="col-form-label">Loại sách:</label>
-                                    <input type="text" class="form-control" id="category-film" name="name" required>
-                                </div>
-                                <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">
-                                    Đóng
-                                </button>
-                                <button type="submit" class="btn btn-primary">Lưu </button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
 
+
+    <!--Modal delete -->
+
+    <!-- Modal Add-->
+    <div class="modal fade" id="exampleModalAdd" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/Category/Add" class="register-form" id="register-form">
+                        <div class="mb-3">
+                            <label for="category-film"
+                                   class="col-form-label">Loại sách:</label>
+                            <input type="text" class="form-control" id="category-film" name="name" required>
                         </div>
-                    </div>
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Đóng
+                        </button>
+                        <button type="submit" class="btn btn-primary">Lưu </button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
                 </div>
             </div>
+        </div>
+    </div>
 
-
+ 

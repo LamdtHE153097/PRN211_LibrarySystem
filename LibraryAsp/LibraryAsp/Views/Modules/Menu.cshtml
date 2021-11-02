@@ -1,0 +1,52 @@
+﻿
+<div id="layoutSidenav_nav">
+    @{ var userInfomatiom = (LibraryAsp.Models.User)Session["USER"]; }
+    <nav style="background-color: #F1F1F1 !important" class="sb-sidenav accordion " id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                @if (userInfomatiom.Role.id_role == 2)
+                {
+                    <a class="nav-link collapsed" href="/Publisher/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
+                        Quản lý Nhà xuất bản
+                    </a>
+                    <a class="nav-link collapsed" href="/Category/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-bookmark"></i></div>
+                        Quản lý Loại sách
+                    </a>
+                    <a class="nav-link collapsed" href="/Book/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                        Quản lý Sách
+                    </a>
+                    <a class="nav-link collapsed" href="/User/ListUser">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-reader"></i></div>
+                        Quản lý Sinh viên
+                    </a>
+                    <a class="nav-link collapsed" href="/BorrowBook/ListTransaction">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý Thuê Trả
+                    </a>
+                }
+                else if (userInfomatiom.Role.id_role == 1)
+                {
+                    <a class="nav-link collapsed" href="/BorrowBook/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Thuê sách
+                    </a>
+                    <a class="nav-link collapsed" href="/BorrowBook/ListTransactionBorrow">
+                        <div class="sb-nav-link-icon"><i class="fas fa-history"></i></div>
+                        Lịch sử thuê trả
+                    </a>
+                    <a class="nav-link collapsed" href="/BorrowBook/ListTransactionPunish">
+                        <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                        Lịch sử bị phạt
+                    </a>
+                } 
+            </div>
+        </div>
+
+    </nav>
+</div>
+
+
+

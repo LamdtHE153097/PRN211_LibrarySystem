@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "ListTransaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        @{ DateTime aDateTime = DateTime.Now; }
+        <div style="display:flex;justify-content:space-between">
+            <div>
+                <h1 class="mt-4">Quản lý Thuê Trả</h1>
+            </div>
+            <div class="mt-5">
+                <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:yyyy-MM-dd}", @aDateTime)</span>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.mes != null)
+                {
+                    if (ViewBag.mes == "1")
+                    {
+                        <div class="alert alert-success">
+                            <strong>Thành công</strong>
+                        </div>
+                    }
+                }
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr style="background-color: #F7F8F9; color: #0056A7 ">
+                                <th width="50px">STT</th>
+                                <th>Tên sinh viên</th>
+                                <th>Tên sách</th>
+                                <th>Ngày thuê</th>
+                                <th>Ngày trả</th>
+                                <th>Trạng thái </th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Date</th>
+                                <th>Showtime</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @{ var index = 0;}
+                            @foreach (var item in ViewBag.list)
+                            {
+                                index += 1;
+                            <tr>
+                                <td>@index</td>
+                                <td>
+                                    @foreach (var item1 in ViewBag.listUser)
+                                    {
+                                        if (item1.id_user == item.id_user)
+                                        {
+                                            <p>@item1.fullname</p>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @foreach (var item2 in ViewBag.listBook)
+                                    {
+                                        if (item2.id_book == item.id_book)
+                                        {
+                                            <p>@item2.name</p>
+                                        }
+                                    }
+                                </td>
+                                <td>@String.Format("{0:yyyy-MM-dd}", @item.start_time) </td>
+                                <td>@String.Format("{0:yyyy-MM-dd}", @item.end_time)</td>
+
+                                @if (item.status == 1)
+                                {
+                                    <td><span class="badge badge-danger" style="background-color:goldenrod;font-size:12px">Chờ duyệt</span></td>
+                                }
+                                else if (item.status == 2)
+                                {
+                                    <td><span class="badge badge-danger" style="background-color: forestgreen; font-size: 12px ">Đang thuê</span></td>
+                                }
+                                else if (item.status == 3)
+                                {
+                                    <td><span class="badge badge-danger" style="background-color: blue; font-size: 12px ">Đã Trả</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="badge badge-danger" style="background-color: firebrick; font-size: 12px ">Bị phạt</span></td>
+                                }
+                                <td>
+                                    <a style="color: #0056A7;font-size:20px;border:1px solid #ccc;width:50px;height:50px" class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false"></a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="/change-status/@item.id_transaction/2">Đang thuê</a></li>
+                                        <li><a class="dropdown-item" href="/change-status/@item.id_transaction/3">Đã trả</a></li>
+                                        <li><a class="dropdown-item" href="/change-status/@item.id_transaction/4">Bị phạt</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -23,6 +23,6 @@ namespace LibraryAsp.Models
         public DbSet<Book> books { get; set; }
 
         public DbSet<Publisher> publishers { get; set; }
-
+        public DbSet<Post> posts { get; set; }
     }
 }

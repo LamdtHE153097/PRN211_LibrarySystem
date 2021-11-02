@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="container py-2">
+                    <div class="row bg-primary bg-opacity-75 rounded-3"
+                         style="
+                background-color: #f39f86;
+                background-image: linear-gradient(
+                  315deg,
+                  #f39f86 0%,
+                  #f9d976 74%
+                );
+              ">
+                        <div class="my-2 d-flex justify-content-between text-light">
+                            <span>
+                                <i class="far fa-newspaper-o font text-dark fw-bold">
+                                    Giới thiệu
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                    @foreach (var item in ViewBag.List)
+                    {
+                        <!-- Post -->
+                        <div>
+                            <div class="my-2 text-dark">
+                                <h3 style="text-align: center; padding-top: 20px">
+                                    Giới thiệu sách: @item.title
+                                </h3>
+                                <br />
+                                <p class="mx-3" style="text-align: justify">
+                                    @item.content
+                                </p>
+                                <p style="text-align: right; padding-right: 20px; font-style: italic;">
+                                    @item.id_publisher
+                                </p>
+                                <p>
+                                    Xem thông tin sách tại đây:
+                                    <button type="button"
+                                            class="btn btn-warning"
+                                            data-bs-toggle="modal"
+                                            style="width: 100px !important">
+                                        Chi tiết
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="container py-2">
+                    <div class="row bg-primary bg-opacity-75 rounded-3"
+                         style="
+                background-color: #f39f86;
+                background-image: linear-gradient(
+                  315deg,
+                  #f39f86 0%,
+                  #f9d976 74%
+                );
+              ">
+                        <div class="my-2 d-flex justify-content-between text-light">
+                            <span>
+                                <i class="far fa-thumbs-up font text-dark fw-bold">
+                                    Sách nổi bật
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card mb-1">
+                            <div class="row g-0">
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-tran-trong-chinh-minh.jpg"
+                                             class="img-fluid rounded-start"
+                                             alt="..." />
+                                    </a>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body text-truncate">
+                                        <p class="card-title">
+                                            <a href="#"
+                                               class="fw-bold text-dark text-decoration-none h5">
+                                                Trân trọng chính mình
+                                            </a>
+                                        </p>
+                                        <p class="card-text">Patricia Spadaro</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-3">
+                                    <a href="#">
+                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-Tuoi-tre-ban-khoan.jpg"
+                                             class="img-fluid rounded-start"
+                                             alt="..." />
+                                    </a>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body text-truncate">
+                                        <p class="card-title">
+                                            <a href="#"
+                                               class="fw-bold text-dark text-decoration-none h5">
+                                                Tuổi trẻ băn khoăn
+                                            </a>
+                                        </p>
+                                        <p class="card-text">Hermann Hesse</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
