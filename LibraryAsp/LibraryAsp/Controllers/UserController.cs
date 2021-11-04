@@ -13,7 +13,7 @@ namespace LibraryAsp.Controllers
         // GET: User
 
         AuthenticationDao authenticationDao = new AuthenticationDao();
-
+	//Thông tin của học sinh
         public ActionResult Index()
         {
             User user = (User)Session["USER"];
@@ -29,21 +29,7 @@ namespace LibraryAsp.Controllers
             }
            
         }
-        public ActionResult Edit(string mess)
-        {
-            User user = (User)Session["USER"];
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Authentication");
-            }
-            else
-            {
-                var list = authenticationDao.getInformationByUserName(user.email);
-                ViewBag.list = list;
-                ViewBag.mes = mess;
-                return View();
-            }
-        }
+	//Chỉnh sửa thông tin học sinh
         [HttpPost]
         public ActionResult EditPost(FormCollection form)
         {
@@ -57,7 +43,7 @@ namespace LibraryAsp.Controllers
             authenticationDao.editUser(user);
             return RedirectToAction("Edit", new { mess = "1" });
         }
-
+	//Đổi mật khẩu học sinh
         public ActionResult UpdatePassword(string mess)
         {
             User user = (User)Session["USER"];
@@ -71,7 +57,7 @@ namespace LibraryAsp.Controllers
                 return View();
             }
         }
-
+	//Đổi mật khẩu của học sinh
         [HttpPost]
         public ActionResult UpdatePasswordPost(FormCollection form)
         {
@@ -88,12 +74,14 @@ namespace LibraryAsp.Controllers
                 return RedirectToAction("UpdatePassword", new { mess = "2" });
             }
         }
+	//List full users in ViewManage
         public ActionResult ListUser(string mess)
         {
             ViewBag.mes = mess;
             ViewBag.list = authenticationDao.getStudent();
             return View();
         }
+	//Thêm 1 học sinh mới
         [HttpPost]
         public ActionResult AddUser(FormCollection form)
         {
