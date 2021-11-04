@@ -184,6 +184,106 @@
                             <!-- Modal Edit Detail-->
 
                             <!-- Need to fix  -->
+                            <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <form action="/Book/Update" method="post">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="">Sửa Thông Tin Của Sách</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div id="resultss" class="modal-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <img style="width: 100% !important;height: 250px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                                        @*<div class="mb-3">
+                                                            <label for="exampleFormControlFile1">Sửa Ảnh:</label>
+                                                            <input type="file" class="form-control-file mt-2" name="file" id="file" accept="image/*" required>
+                                                        </div>*@
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input class="form-control" type="text" id="name" name="name" value="@item.name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input class="form-control" type="text" id="author" name="author" value="@item.author">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Nhà xuất bản: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <select class="form-select" aria-label="Default select example" id="theloai" name="nxb" required>
+                                                                    @*<option value="" selected>Chọn Nhà xuất bản</option>*@
+                                                                    @{var nxbNew = new LibraryAsp.Dao.PublisherDao().getAll();
+                                                                    }
+                                                                    @foreach (var item2 in nxbNew)
+                                                                    {
+                                                                        <option value="@item2.id_publisher">@item2.name</option>
+                                                                        if (item2.id_publisher == item.id_publisher)
+                                                                        {
+                                                                            <option value="@item.id_publisher">@item.name</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Loai Sách</label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <select class="form-select" aria-label="Default select example" id="theloai" name="loaisach" required>
+                                                                    @*<option value="" selected>Chọn Loại sách</option>*@
+                                                                    @{var cateNew = new LibraryAsp.Dao.CategoryDao().getAll();
+                                                                    }
+                                                                    @foreach (var item1 in cateNew)
+                                                                    {
+                                                                        <option value="@item1.id_category">@item1.name</option>
+                                                                        if(item1.id_category == item.id_category)
+                                                                        {
+                                                                            <option value="@item.id_category">@item.name</option>
+                                                                        }
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm phát hành: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input class="form-control" type="text" id="yearhub" name="yearpub" value="@item.year_publish">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Giá thuê: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input class="form-control" type="text" id="price" name="price" value="@item.price">
+                                                            </div>
+                                                        </div>
+
+                                                        <input class="form-control" type="hidden" id="id_book" name="id_book" value="@item.id_book" hidden>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;">Nội dung</label><br />
+                                                    <textarea class="form-control" cols="30" rows="5" name="noidung">@Html.Raw(item.description)</textarea>
+                                                </div>
+                                            </div>
+
                                             <div class="modal-footer">
                                                 <button type="submit" style="width:100px" class="btn btn-primary">Sửa</button>
                                             </div>
