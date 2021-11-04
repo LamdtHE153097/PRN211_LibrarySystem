@@ -34,5 +34,14 @@ namespace LibraryAsp.Dao
             myDb.publishers.Remove(obj);
             myDb.SaveChanges();
         }
+ public List<Publisher> getAll()
+        {
+            return myDb.publishers.OrderByDescending(p => p.id_publisher).ToList();
+        } 
+public void add(Publisher publisher)
+        {
+            myDb.publishers.Add(publisher);
+            myDb.SaveChanges();
+        }
     }
 }
