@@ -41,13 +41,6 @@
                             <th>Hành Động</th>
                         </tr>
                     </tfoot>
-  <div class="card mb-4">
-            <div class="card-header">
-                @if (ViewBag.Msg == "1")
-                {
-                    <div class="alert alert-success">
-                        <strong>Thành công</strong>
-                    </div>
                     <tbody>
 
                         @{ var stt = 1;}
@@ -84,7 +77,11 @@
                                             <div id="resultss" class="modal-body">
                                                 <div class="row">
                                                     <div class="col">
-                                                       
+                                                        <div class="">
+                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên Loại Sách: </label>
+                                                            <input class="form-control" type="text" id="name" name="name" value="@item.name">
+                                                            <input class="form-control" type="hidden" id="id_category" name="id_category" value="@item.id_category" hidden>
+                                                        </div>
                                                     </div>
 
                                                 </div>
