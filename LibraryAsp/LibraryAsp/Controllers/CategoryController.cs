@@ -44,6 +44,9 @@ namespace LibraryAsp.Controllers
             Category cat = new Category();
             cat.id_category = Convert.ToInt32(form["id"]);
             category.delete(cat.id_category);
+ Category cat = new Category();
+            cat.id_category = Convert.ToInt32(form["id_category"]);
+            cat.name = form["name"];
             return RedirectToAction("Index", new { msg="1"});
         }
 
