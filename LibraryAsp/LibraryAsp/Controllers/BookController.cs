@@ -18,6 +18,8 @@ namespace LibraryAsp.Controllers
             ViewBag.List = book.getAll();
             return View();
         }
+        
+        // Add modal form
         [HttpPost]
         public ActionResult Add(FormCollection form)
         {
@@ -40,7 +42,7 @@ namespace LibraryAsp.Controllers
             return RedirectToAction("Index", new { msg = "1" });
         }
 
-         // Edit detail of information
+        // Edit detail of information
         [HttpPost]
         public ActionResult Update(FormCollection form)
         {
@@ -66,5 +68,7 @@ namespace LibraryAsp.Controllers
             book.delete(bookNew.id_book);
             return RedirectToAction("Index", new { msg = "1" });
         }
+        
+            
     }
 }

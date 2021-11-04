@@ -18,5 +18,13 @@ namespace LibraryAsp.Controllers
             ViewBag.List = post.getAll();
             return View();
         }
+        public ActionResult getPostById(int id)
+        {
+            ViewBag.Post = post.getInformationById(id);
+            BookDao book = new BookDao();
+            ViewBag.List = post.getAll();
+            ViewBag.Book = book.getFiveBook();
+            return RedirectToAction("Index");
+        }
     }
 }
