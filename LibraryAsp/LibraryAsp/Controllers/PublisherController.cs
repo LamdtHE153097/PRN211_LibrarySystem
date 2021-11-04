@@ -26,15 +26,16 @@ namespace LibraryAsp.Controllers
             publisher.add(pub);
             return RedirectToAction("Index", new { msg = "1" });
         }
-       [HttpPost]
+        [HttpPost]
         public ActionResult Update(FormCollection form)
         {
             Publisher pub = new Publisher();
-            pub.id_publisher =Int32.Parse(form["id"]);
+            pub.id_publisher = Int32.Parse(form["id_publisher"]);
             pub.name = form["name"];
             publisher.edit(pub);
             return RedirectToAction("Index", new { msg = "1" });
         }
+
         [HttpPost]
         public ActionResult Delete(FormCollection form)
         {
@@ -43,12 +44,6 @@ namespace LibraryAsp.Controllers
             publisher.delete(pub.id_publisher);
             return RedirectToAction("Index", new { msg = "1" });
         }
-  public ActionResult Add(FormCollection form)
-        {
-            Publisher pub = new Publisher();
-            pub.name = form["name"];
-            publisher.add(pub);
-            return RedirectToAction("Index", new { msg = "1" });
-        }
+
     }
 }

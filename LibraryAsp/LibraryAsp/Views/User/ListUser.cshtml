@@ -56,7 +56,7 @@
                                 <td>
                                     @if (item.gender == 1)
                                     {
-                                        <span>Nam</span>
+                                    <span>Nam</span>
                                     }
                                     else
                                     {
@@ -67,19 +67,20 @@
                                     @String.Format("{0:yyyy-MM-dd}", @item.birthday)
                                 </td>
                                 <td>
-                                    @item.phone
+                                      @item.phone  
                                 </td>
                                 <td>
-                                    @item.address
+                                   @item.address
                                 </td>
                             </tr>
+                            
                             stt++;
                         }
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>              
+    </div>
 </main>
 <!-- Modal Add-->
 <div class="modal fade" id="exampleModalAdd" tabindex="-1"

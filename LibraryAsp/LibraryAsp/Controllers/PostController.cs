@@ -12,21 +12,17 @@ namespace LibraryAsp.Controllers
     {
         PostDao post = new PostDao();
         // GET: Post
-        public ActionResult Index(string msg)
+        public ActionResult Index(int id)
         {
-            ViewBag.Msg = msg;
+            ViewBag.Post = post.getInformationById(Convert.ToInt32(id));
+            BookDao book = new BookDao();
             ViewBag.List = post.getAll();
+            ViewBag.Book = book.getFiveBook();
             return View();
         }
         public ActionResult getPostById(int id)
         {
-            Console.WriteLine("Day la id: " + id);
-            Console.WriteLine("Day la post: " + post.getInformationById(id).content);
-            ViewBag.Post = post.getInformationById(id);
-            BookDao book = new BookDao();
-            ViewBag.List = post.getAll();
-            ViewBag.Book = book.getFiveBook();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id });
         }
     }
 }
