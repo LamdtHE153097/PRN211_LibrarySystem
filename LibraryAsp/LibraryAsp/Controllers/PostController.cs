@@ -20,6 +20,8 @@ namespace LibraryAsp.Controllers
         }
         public ActionResult getPostById(int id)
         {
+            Console.WriteLine("Day la id: " + id);
+            Console.WriteLine("Day la post: " + post.getInformationById(id).content);
             ViewBag.Post = post.getInformationById(id);
             BookDao book = new BookDao();
             ViewBag.List = post.getAll();
