@@ -24,6 +24,31 @@ namespace LibraryAsp.Dao
         }
 
        
+  public void delete(int id_book)
+        {
+            var result = myDb.books.Where(x => x.id_book == id_book).SingleOrDefault();
+            myDb.books.Remove(result);
+            myDb.SaveChanges();
+        }
 
+        public void update(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, int id_book)
+        {
+            
+            string sql = @"update dbo.Books set [name] = @name, author = @author , id_category = @id_cat,
+                    id_publisher = @id_pub, year_publish = @year, price = @price, [description] = @descrip 
+                    where id_book = @id_book
+                    ";
+
+            myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@name", name),
+                new SqlParameter("@author", author),
+                new SqlParameter("@id_cat", id_category),
+                new SqlParameter("@id_pub", id_publisher),
+                new SqlParameter("@year", year_publish),
+                new SqlParameter("@price", price),
+                new SqlParameter("@descrip", description),
+                new SqlParameter("@id_book", id_book)
+                );
+        }
+    }
        
 }
