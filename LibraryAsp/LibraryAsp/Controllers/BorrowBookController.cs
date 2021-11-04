@@ -59,32 +59,7 @@ namespace LibraryAsp.Controllers
             ViewBag.list = transactionDao.getTransactionBorrow(id);
             return View();
         }
-
-        // public ActionResult ListTransactionPunish()
-        // {
-        //     var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
-        //     var id = userInfomatiom.id_user;
-        //     ViewBag.listUser = authenticationDao.getAll();
-        //     ViewBag.listBook = bookDao.getAll();
-        //     ViewBag.list = transactionDao.getTransactionPunish(id);
-        //     return View();
-        // }
-
-        // public ActionResult ListTransaction(string mess)
-        // {
-        //     ViewBag.mes = mess;
-        //     ViewBag.listUser = authenticationDao.getAll();
-        //     ViewBag.listBook = bookDao.getAll();
-        //     ViewBag.list = transactionDao.getTransaction();
-        //     return View();
-        // }
-
-        // // đẩy về DB đổi status của quyển sách. 1 là mặc định, chờ duyệt. 2 là đang thuê. 3 là đã trả. 4 là nợ
-        // public ActionResult changeStatus(int id, int status)
-        // {
-        //     transactionDao.updateStatus(status, id);
-        //     return RedirectToAction("ListTransaction", new { mess = "1" });
-        // }
+        
         public ActionResult ListTransactionPunish()
         {
             var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
