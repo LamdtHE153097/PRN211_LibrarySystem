@@ -18,6 +18,11 @@ namespace LibraryAsp
                defaults: new { controller = "BorrowBook", action = "changeStatus" }
            );
             routes.MapRoute(
+               name: "postDetails",
+               url: "postDetails/{id}",
+               defaults: new { controller = "Post", action = "getPostById" }
+           );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

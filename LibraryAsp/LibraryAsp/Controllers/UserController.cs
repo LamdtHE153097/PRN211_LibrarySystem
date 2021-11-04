@@ -63,7 +63,7 @@ namespace LibraryAsp.Controllers
             User user = (User)Session["USER"];
             if (user == null)
             {
-                return RedirectToAction("Login", "Authentication");
+                return RedirectToAction("Index", "Authentication");
             }
             else
             {
@@ -81,11 +81,11 @@ namespace LibraryAsp.Controllers
             if (password.Equals(rePassword))
             {
                 authenticationDao.updatePassword(user.email,password);
-                return RedirectToAction("UpdatePassword", new { mess = "1" });
+                return RedirectToAction("Index", new { msg = "1" });
             }
             else
             {
-                return RedirectToAction("UpdatePassword", new { mess = "2" });
+                return RedirectToAction("Index", new { msg = "2" });
             }
         }
         public ActionResult ListUser(string mess)

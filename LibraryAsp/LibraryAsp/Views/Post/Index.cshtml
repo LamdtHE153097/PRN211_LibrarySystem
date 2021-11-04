@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="container py-2">
-                    <div class="row bg-primary bg-opacity-75 rounded-3"
+                    <div class="my-2 row bg-primary bg-opacity-75 rounded-3"
                          style="
                 background-color: #f39f86;
                 background-image: linear-gradient(
@@ -20,37 +20,56 @@
               ">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
-                                <i class="far fa-newspaper-o font text-dark fw-bold">
+                                <p class="font text-dark fw-bold">
                                     Giới thiệu
+                                </p>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Post -->
+                    <div>
+                        <div class="my-2 text-dark">
+                            <h3 style="text-align: center; padding-top: 20px">
+                                Giới thiệu sách: @ViewBag.Post.title
+                            </h3>
+                            <br />
+                            <p class="mx-3" style="text-align: justify">
+                                @ViewBag.Post.content
+                            </p>
+                            <p style="text-align: right; padding-right: 20px; font-style: italic;">
+                                Nhà xuất bản
+                                @{var nhaxb = new LibraryAsp.Dao.PublisherDao().getAll();
+                                }
+                                @foreach (var item1 in nhaxb)
+                                {
+                                    if (item1.id_publisher == ViewBag.Post.id_publisher)
+                                    {
+                                        @item1.name;
+                                    }
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row bg-primary bg-opacity-75 rounded-3"
+                         style="background-color: #f39f86; background-image: linear-gradient(315deg, #f39f86 0%, #f9d976 74%);">
+                        <div class="my-2 d-flex justify-content-between text-light">
+                            <span>
+                                <i class="font text-dark fw-bold">
+                                    Các bài giới thiệu khác
                                 </i>
                             </span>
                         </div>
                     </div>
                     @foreach (var item in ViewBag.List)
                     {
-                        <!-- Post -->
-                        <div>
-                            <div class="my-2 text-dark">
-                                <h3 style="text-align: center; padding-top: 20px">
-                                    Giới thiệu sách: @item.title
-                                </h3>
-                                <br />
-                                <p class="mx-3" style="text-align: justify">
-                                    @item.content
-                                </p>
-                                <p style="text-align: right; padding-right: 20px; font-style: italic;">
-                                    @item.id_publisher
-                                </p>
-                                <p>
-                                    Xem thông tin sách tại đây:
-                                    <button type="button"
-                                            class="btn btn-warning"
-                                            data-bs-toggle="modal"
-                                            style="width: 100px !important">
-                                        Chi tiết
-                                    </button>
-                                </p>
-                            </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <a href="/postDetails/@item.id_post">Giới thiệu sách: @item.title</a>
+                            @{
+                                string dateCreate = String.Format("{0:dd-MM-yyyy H:mm}", item.createdAt);
+                            }
+                            <p>@dateCreate</p>
                         </div>
                     }
                 </div>
@@ -68,7 +87,7 @@
               ">
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
-                                <i class="far fa-thumbs-up font text-dark fw-bold">
+                                <i class="font text-dark fw-bold">
                                     Sách nổi bật
                                 </i>
                             </span>
@@ -76,45 +95,94 @@
                     </div>
                     <div class="row">
                         <div class="card mb-1">
+                            @{var category = new LibraryAsp.Dao.CategoryDao().getAll();
+                            }
                             <div class="row g-0">
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-tran-trong-chinh-minh.jpg"
-                                             class="img-fluid rounded-start"
-                                             alt="..." />
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card-body text-truncate">
-                                        <p class="card-title">
-                                            <a href="#"
-                                               class="fw-bold text-dark text-decoration-none h5">
-                                                Trân trọng chính mình
-                                            </a>
-                                        </p>
-                                        <p class="card-text">Patricia Spadaro</p>
+                                @foreach (var item in ViewBag.Book)
+                                {
+                                    <div class="col-md-3">
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#check">
+                                            <img style=" width: 80px !important;height: 80px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row g-0">
-                                <div class="col-md-3">
-                                    <a href="#">
-                                        <img src="https://www.elle.vn/wp-content/uploads/2020/03/18/393135/sach-hay-Tuoi-tre-ban-khoan.jpg"
-                                             class="img-fluid rounded-start"
-                                             alt="..." />
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="card-body text-truncate">
-                                        <p class="card-title">
-                                            <a href="#"
-                                               class="fw-bold text-dark text-decoration-none h5">
-                                                Tuổi trẻ băn khoăn
-                                            </a>
-                                        </p>
-                                        <p class="card-text">Hermann Hesse</p>
+                                    <div class="col-md-9">
+                                        <div class="card-body text-truncate">
+                                            <p class="card-title">
+                                                <a href="#"
+                                                   class="fw-bold text-dark text-decoration-none h5">
+                                                    @item.name
+                                                </a>
+                                            </p>
+                                            <p class="card-text">@item.author</p>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="modal fade" id="check" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <img style="width: 100% !important;height: 250px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách</label>
+                                                                :@item.name
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả</label>
+                                                                :@item.author
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Nhà xuất bản</label>
+                                                                : @foreach (var item2 in nhaxb)
+                                                                {
+                                                                    if (item2.id_publisher == item.id_publisher)
+                                                                    {
+                                                                        @item2.name;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Thể loại</label>
+                                                                : @foreach (var item1 in category)
+                                                                {
+                                                                    if (item1.id_category == item.id_category)
+                                                                    {
+                                                                        @item1.name;
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm phát hành</label>
+                                                                : @item.year_publish
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Giá thuê</label>
+                                                                : @item.price VND
+                                                            </div>
+                                                            <div class="">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Ngày thêm</label>
+                                                                : @item.createdAt
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;">Nội dung</label><br />
+                                                            @Html.Raw(item.description)
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -123,4 +191,5 @@
         </div>
     </div>
 </main>
+
 
