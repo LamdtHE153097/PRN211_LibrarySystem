@@ -39,5 +39,32 @@ namespace LibraryAsp.Controllers
             book.add(name, author, nxb, loaisach, year, price, description, postedFileName, createdAt);
             return RedirectToAction("Index", new { msg = "1" });
         }
+
+         // Edit detail of information
+        [HttpPost]
+        public ActionResult Update(FormCollection form)
+        {
+            var loaisach = Int32.Parse(form["loaisach"]);
+            var nxb = Int32.Parse(form["nxb"]);
+            var price = float.Parse(form["price"]);
+            var year = Int32.Parse(form["yearpub"]);
+            var name = form["name"];
+            var author = form["author"];
+            var description = form["noidung"];
+            var bookid = Int32.Parse(form["id_book"]);
+
+            book.update(name,author,nxb,loaisach,year,price,description,bookid);
+            return RedirectToAction("Index", new { msg = "1" });
+        }
+
+        // Delede information of book
+        [HttpPost]
+        public ActionResult Delete(FormCollection form)
+        {
+            Book bookNew = new Book();
+            bookNew.id_book = Convert.ToInt32(form["id"]);
+            book.delete(bookNew.id_book);
+            return RedirectToAction("Index", new { msg = "1" });
+        }
     }
 }
