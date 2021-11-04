@@ -20,9 +20,7 @@ namespace LibraryAsp.Dao
             myDb.categories.Add(category);
             myDb.SaveChanges();
         }
-       
-        }
-public void edit(Category category)
+        public void edit(Category category)
         {
             string sql = "update dbo.Categories set [name] = @nameCat where id_category = @idCat";
 
