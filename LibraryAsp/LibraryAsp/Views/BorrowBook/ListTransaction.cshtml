@@ -12,7 +12,7 @@
                 <h1 class="mt-4">Quản lý Thuê Trả</h1>
             </div>
             <div class="mt-5">
-                <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:yyyy-MM-dd}", @aDateTime)</span>
+                <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:dd-MM-yyyy}", @aDateTime)</span>
             </div>
         </div>
 
@@ -74,8 +74,8 @@
                                         }
                                     }
                                 </td>
-                                <td>@String.Format("{0:yyyy-MM-dd}", @item.start_time) </td>
-                                <td>@String.Format("{0:yyyy-MM-dd}", @item.end_time)</td>
+                                <td>@String.Format("{0:dd-MM-yyyy}", @item.start_time) </td>
+                                <td>@String.Format("{0:dd-MM-yyyy}", @item.end_time)</td>
 
                                 @if (item.status == 1)
                                 {

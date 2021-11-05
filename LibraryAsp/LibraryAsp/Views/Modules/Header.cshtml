@@ -11,7 +11,7 @@
     <button style="color:white" class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
         <i class="fas fa-bars"></i>
     </button>
-    <p style="color:white;margin-top:15px"> <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:yyyy-MM-dd}", @aDateTime)</span></p>
+    <p style="color:white;margin-top:15px"> <span style="font-weight:bold">Hôm nay ngày : </span><span>@String.Format("{0:dd-MM-yyyy}", @aDateTime)</span></p>
     @if (userInfomatiom.Role.id_role == 1)
     {
         <p style="color:white;margin-top:15px;margin-left:20px"> <span style="font-weight:bold">Xin chào Sinh viên : </span><span>@userInfomatiom.fullname</span></p>

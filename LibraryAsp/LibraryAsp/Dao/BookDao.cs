@@ -26,13 +26,7 @@ namespace LibraryAsp.Dao
             string sql = "insert into Books(name,author,id_publisher,id_category,year_publish,price,description,image,createdAt) values(N'" + name + "',N'" + author + "','" + id_publisher + "','" + id_category + "','" + year_publish + "','" + price + "',N'" + description + "',N'" + image + "','" + createdAt + "')";
             myDb.Database.ExecuteSqlCommand(sql);
         }
-
-<<<<<<< HEAD
-       
-  public void delete(int id_book)
-=======
         public void delete(int id_book)
->>>>>>> 8f4f7442a6e6289021837a5fe5d1c6f0af549bc8
         {
             var result = myDb.books.Where(x => x.id_book == id_book).SingleOrDefault();
             myDb.books.Remove(result);
@@ -58,8 +52,4 @@ namespace LibraryAsp.Dao
                 );
         }
     }
-<<<<<<< HEAD
-       
-=======
->>>>>>> 8f4f7442a6e6289021837a5fe5d1c6f0af549bc8
 }
