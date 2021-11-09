@@ -24,5 +24,28 @@ namespace LibraryAsp.Dao
         {
             return myDb.posts.OrderByDescending(x => x.id_post).FirstOrDefault();
         }
+        public void add(string title, string content, int id_publisher, DateTime createdAt, int id_user)
+        {
+            string sql = "insert into Posts(title,content,id_publisher,createdAt,id_user) values(N'" + title + "',N'" + content + "','" + id_publisher + "," + createdAt + "," + id_user + "')";
+            myDb.Database.ExecuteSqlCommand(sql);
+        }
+        public void update(string title, string content, int id_publisher, int id_post)
+        {
+
+            string sql = @"update dbo.Books set title = @title, content = @content, 
+                        id_publisher = @id_publisher where where id_post = @id_post";
+
+            myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@title", title),
+                new SqlParameter("@content", content),
+                new SqlParameter("@id_publisher", id_publisher),
+                new SqlParameter("@id_post", id_post)
+                );
+        }
+        public void delete(int id_post)
+        {
+            var result = myDb.posts.Where(x => x.id_post == id_post).SingleOrDefault();
+            myDb.posts.Remove(result);
+            myDb.SaveChanges();
+        }
     }
 }

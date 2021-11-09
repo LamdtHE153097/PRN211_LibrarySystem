@@ -31,14 +31,16 @@ namespace LibraryAsp.Controllers
             ViewBag.List = post.getAll();
             return View();
         }
-        //[HttpPost]
-        //public ActionResult Add(FormCollection form)
-        //{
-        //    Post p = new Post();
-        //    p.title = form[""];
-        //    post.add(pub);
-        //    return RedirectToAction("Index", new { msg = "1" });
-        //}
+        [HttpPost]
+        public ActionResult Add(FormCollection form)
+        {
+            var title = form["title"];
+            var publisher = Int32.Parse(form["publisher"]);
+            var content = form["content"];
+            DateTime createdAt = DateTime.Now;
+            post.add(title, content, publisher, createdAt, 1);
+            return RedirectToAction("Manage", new { msg = "1" });
+        }
         //[HttpPost]
         //public ActionResult Update(FormCollection form)
         //{
