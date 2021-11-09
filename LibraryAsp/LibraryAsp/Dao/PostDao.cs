@@ -32,8 +32,8 @@ namespace LibraryAsp.Dao
         public void update(string title, string content, int id_publisher, int id_post)
         {
 
-            string sql = @"update dbo.Books set title = @title, content = @content, 
-                        id_publisher = @id_publisher where where id_post = @id_post";
+            string sql = @"update dbo.Posts set title = @title, content = @content, 
+                        id_publisher = @id_publisher where id_post = @id_post";
 
             myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@title", title),
                 new SqlParameter("@content", content),

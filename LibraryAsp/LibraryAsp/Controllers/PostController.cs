@@ -41,23 +41,25 @@ namespace LibraryAsp.Controllers
             post.add(title, content, publisher, createdAt, 1);
             return RedirectToAction("Manage", new { msg = "1" });
         }
-        //[HttpPost]
-        //public ActionResult Update(FormCollection form)
-        //{
-        //    Publisher pub = new Publisher();
-        //    pub.id_publisher = Int32.Parse(form["id_publisher"]);
-        //    pub.name = form["name"];
-        //    publisher.edit(pub);
-        //    return RedirectToAction("Index", new { msg = "1" });
-        //}
+        [HttpPost]
+        public ActionResult Update(FormCollection form)
+        {
+            var title = form["title"];
+            var id_publisher = Int32.Parse(form["publisher"]);
+            var content = form["content"];
+            var id_post = Int32.Parse(form["id_post"]);
 
-        //[HttpPost]
-        //public ActionResult Delete(FormCollection form)
-        //{
-        //    Publisher pub = new Publisher();
-        //    pub.id_publisher = Convert.ToInt32(form["id"]);
-        //    publisher.delete(pub.id_publisher);
-        //    return RedirectToAction("Index", new { msg = "1" });
-        //}
+            post.update(title, content, id_publisher, id_post);
+            return RedirectToAction("Manage", new { msg = "1" });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(FormCollection form)
+        {
+            Post postDel = new Post();
+            postDel.id_post = Convert.ToInt32(form["id_post"]);
+            post.delete(postDel.id_post);
+            return RedirectToAction("Index", new { msg = "1" });
+        }
     }
 }
