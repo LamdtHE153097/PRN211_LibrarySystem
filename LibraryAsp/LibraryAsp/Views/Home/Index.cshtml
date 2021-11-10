@@ -88,7 +88,7 @@
                         <div class="my-2 d-flex justify-content-between text-light">
                             <span>
                                 <i class="font text-dark fw-bold">
-                                    Sách nổi bật
+                                    Sách mới
                                 </i>
                             </span>
                         </div>
@@ -100,23 +100,27 @@
                             <div class="row g-0">
                                 @foreach (var item in ViewBag.Book)
                                 {
-                                    <div class="col-md-3">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#check">
-                                            <img style=" width: 80px !important;height: 80px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
-                                        </a>
-                                    </div>
+                                <div class="col-md-3">
+                                    @{
+                                        var idModelDes = "exampleModalDes" + item.id_book;
+                                    }
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#@idModelDes">
+                                        <img style=" width: 80px !important;height: 80px !important;" src="/Content/assets/img/@item.image" class="img-fluid">
+                                    </a>
+                                </div>
                                     <div class="col-md-9">
                                         <div class="card-body text-truncate">
                                             <p class="card-title">
                                                 <a href="#"
-                                                   class="fw-bold text-dark text-decoration-none h5">
+                                                   class="fw-bold text-dark text-decoration-none h5"
+                                                   data-bs-toggle="modal" data-bs-target="#@idModelDes">
                                                     @item.name
                                                 </a>
                                             </p>
                                             <p class="card-text">@item.author</p>
                                         </div>
                                     </div>
-                                    <div class="modal fade" id="check" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                    <div class="modal fade" id="@idModelDes" tabindex="-1" aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -191,5 +195,6 @@
         </div>
     </div>
 </main>
+
 
 
