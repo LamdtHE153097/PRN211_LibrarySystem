@@ -487,7 +487,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
-    <Content Include="Views\User\UpdatePassword.cshtml" />
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\Post\Manage.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />

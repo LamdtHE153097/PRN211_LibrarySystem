@@ -14,7 +14,7 @@ namespace LibraryAsp.Controllers
 
         AuthenticationDao authenticationDao = new AuthenticationDao();
 
-        public ActionResult Index()
+        public ActionResult Index(string mess)
         {
             User user = (User)Session["USER"];
             if(user == null)
@@ -24,6 +24,7 @@ namespace LibraryAsp.Controllers
             else
             {
                 var list = authenticationDao.getInformationByUserName(user.email);
+                ViewBag.Msg = Convert.ToInt32(mess);
                 ViewBag.list = list;
                 return View();
             }
@@ -45,7 +46,7 @@ namespace LibraryAsp.Controllers
             }
         }
         [HttpPost]
-        public ActionResult EditPost(FormCollection form)
+        public ActionResult EditUser(FormCollection form)
         {
             User user = new User();
             user.fullname = form["fullname"];
@@ -58,34 +59,21 @@ namespace LibraryAsp.Controllers
             return RedirectToAction("Edit", new { mess = "1" });
         }
 
-        public ActionResult UpdatePassword(string mess)
-        {
-            User user = (User)Session["USER"];
-            if (user == null)
-            {
-                return RedirectToAction("Index", "Authentication");
-            }
-            else
-            {
-                ViewBag.mes = mess;
-                return View();
-            }
-        }
-
         [HttpPost]
-        public ActionResult UpdatePasswordPost(FormCollection form)
+        public ActionResult UpdatePassword(FormCollection form)
         {
             User user = (User)Session["USER"];
+            var oldPassword = form["oldPassword"];
             var password = form["password"];
             var rePassword = form["rePassword"];
-            if (password.Equals(rePassword))
+            if (password.Equals(rePassword) && (user.password.Equals(oldPassword)))
             {
                 authenticationDao.updatePassword(user.email,password);
-                return RedirectToAction("Index", new { msg = "1" });
+                return RedirectToAction("Index", new { mess = "1" });
             }
             else
             {
-                return RedirectToAction("Index", new { msg = "2" });
+                return RedirectToAction("Index", new { mess = "2" });
             }
         }
         public ActionResult ListUser(string mess)

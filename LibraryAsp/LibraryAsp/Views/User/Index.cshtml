@@ -9,21 +9,22 @@
         <h4 class="mt-1">Thông tin tài khoản</h4>
         
         <div class="card mb-4">
-            <div class="card-header">
-                @if (ViewBag.Msg == "1")
+                @if (ViewBag.Msg == 1)
                 {
+                <div class="card-header">
                     <div class="alert alert-success">
                         <strong>Đổi mật khẩu thành công</strong>
                     </div>
+                </div>
                 }
-                else if(ViewBag.Msg =="2")
+                else if(ViewBag.Msg == 2)
                 {
+                <div class="card-header">
                     <div class="alert alert-danger">
                         <strong>Thay đổi mật khẩu thất bại</strong>
                     </div>
+                </div>
                 }
-            </div>
-            
             <div class="card-body">
                 <form enctype="multipart/form-data" action="/Merchant/AddNew" method="post">
                     <div class="col">
@@ -92,7 +93,7 @@
                 <!-- Modal form to edit password-->
                 <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
-                        <form action="/User/UpdatePasswordPost" method="post">
+                        <form action="/User/UpdatePassword" method="post">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="">Đổi mật khẩu</h5>
@@ -101,13 +102,19 @@
                                 <div id="resultss" class="modal-body">
                                     <div class="row">
                                         <div class="mb-2">
-                                            <label for="category-film" class="col-form-label">New Password:<span style="color:red">* </span>:</label>
-                                            <input type="password" class="form-control" id="tenphim" name="password" tabindex="1" value="" required maxlength="20">
+                                            <label for="category-film" class="col-form-label">Old Password<span style="color:red">* </span>:</label>
+                                            <input type="password" class="form-control" name="oldPassword" tabindex="1" value="" required maxlength="20">
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <label for="category-film" class="col-form-label">New Password<span style="color:red">* </span>:</label>
+                                            <input type="password" class="form-control" name="password" tabindex="1" value="" required maxlength="20">
                                         </div>
                                         <div class="mb-2">
-                                            <label for="category-film" class="col-form-label">Re New Password:</label>
-                                            <input type="password" class="form-control" id="tenphim" name="rePassword" tabindex="1" value="" required maxlength="20">
+                                            <label for="category-film" class="col-form-label">Re New Password<span style="color:red">* </span>:</label>
+                                            <input type="password" class="form-control" name="rePassword" tabindex="1" value="" required maxlength="20">
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="modal-footer">
