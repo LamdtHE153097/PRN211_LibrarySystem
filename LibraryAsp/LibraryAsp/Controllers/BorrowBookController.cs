@@ -20,12 +20,20 @@ namespace LibraryAsp.Controllers
         // GET: BorrowBook
         public ActionResult Index(string mess)
         {
-            ViewBag.listP = publisherDao.getAll();
-            ViewBag.listC = categoryDao.getAll();
-            ViewBag.list = bookDao.getAll();
-            ViewBag.mes = mess; 
-            return View();
-        }
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 1)
+            {
+                ViewBag.listP = publisherDao.getAll();
+                ViewBag.listC = categoryDao.getAll();
+                ViewBag.list = bookDao.getAll();
+                ViewBag.mes = mess;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home");
+            }
+         }
 
         [HttpPost]
         public ActionResult add(FormCollection form)
@@ -53,21 +61,35 @@ namespace LibraryAsp.Controllers
         public ActionResult ListTransactionBorrow()
         {
             var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
-            var id = userInfomatiom.id_user;
-            ViewBag.listUser = authenticationDao.getAll();
-            ViewBag.listBook = bookDao.getAll();
-            ViewBag.list = transactionDao.getTransactionBorrow(id);
-            return View();
+            if (userInfomatiom.Role.id_role == 1)
+            {
+                //var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+                var id = userInfomatiom.id_user;
+                ViewBag.listUser = authenticationDao.getAll();
+                ViewBag.listBook = bookDao.getAll();
+                ViewBag.list = transactionDao.getTransactionBorrow(id);
+                return View();
+            } else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         public ActionResult ListTransactionPunish()
         {
             var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
-            var id = userInfomatiom.id_user;
-            ViewBag.listUser = authenticationDao.getAll();
-            ViewBag.listBook = bookDao.getAll();
-            ViewBag.list = transactionDao.getTransactionPunish(id);
-            return View();
+            if (userInfomatiom.Role.id_role == 1)
+            {
+                var id = userInfomatiom.id_user;
+                ViewBag.listUser = authenticationDao.getAll();
+                ViewBag.listBook = bookDao.getAll();
+                ViewBag.list = transactionDao.getTransactionPunish(id);
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         public ActionResult ListTransaction(string mess)

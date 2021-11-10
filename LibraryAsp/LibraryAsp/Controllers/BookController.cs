@@ -14,6 +14,7 @@ namespace LibraryAsp.Controllers
         // GET: Book
         public ActionResult Index(string msg)
         {
+
             ViewBag.Msg = msg;
             ViewBag.List = book.getAll();
             return View();

@@ -26,10 +26,19 @@ namespace LibraryAsp.Controllers
         }
         public ActionResult Manage(string msg)
         {
-            ViewBag.Msg = msg;
-            BookDao book = new BookDao();
-            ViewBag.List = post.getAll();
-            return View();
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.Msg = msg;
+                BookDao book = new BookDao();
+                ViewBag.List = post.getAll();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
         }
         [HttpPost]
         public ActionResult Add(FormCollection form)
