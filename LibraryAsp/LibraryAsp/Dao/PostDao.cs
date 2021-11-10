@@ -26,8 +26,13 @@ namespace LibraryAsp.Dao
         }
         public void add(string title, string content, int id_publisher, DateTime createdAt, int id_user)
         {
-            string sql = "insert into Posts(title,content,id_publisher,createdAt,id_user) values(N'" + title + "',N'" + content + "','" + id_publisher + "," + createdAt + "," + id_user + "')";
-            myDb.Database.ExecuteSqlCommand(sql);
+            string sql = @"insert into Posts(title,content,id_publisher,createdAt,id_user) values 
+                    (@tittle, @content, @id_pub, @createdAt, @id_user)";
+            myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@tittle",title),
+                new SqlParameter("@content", content),
+                new SqlParameter("@id_pub", id_publisher),
+                new SqlParameter("@createdAt", createdAt),
+                new SqlParameter("@id_user", id_user));
         }
         public void update(string title, string content, int id_publisher, int id_post)
         {
