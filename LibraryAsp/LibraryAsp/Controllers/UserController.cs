@@ -78,9 +78,16 @@ namespace LibraryAsp.Controllers
         }
         public ActionResult ListUser(string mess)
         {
-            ViewBag.mes = mess;
-            ViewBag.list = authenticationDao.getStudent();
-            return View();
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.mes = mess;
+                ViewBag.list = authenticationDao.getStudent();
+                return View();
+            } else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
         [HttpPost]
         public ActionResult AddUser(FormCollection form)

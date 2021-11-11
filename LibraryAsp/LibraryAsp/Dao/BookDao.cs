@@ -21,9 +21,9 @@ namespace LibraryAsp.Dao
         {
             return myDb.books.OrderByDescending(p => p.id_book).Take(5).ToList();
         }
-        public void add(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, string image, DateTime createdAt)
+        public void add(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, string image, int quantity,DateTime createdAt)
         {
-            string sql = "insert into Books(name,author,id_publisher,id_category,year_publish,price,description,image,createdAt) values(N'" + name + "',N'" + author + "','" + id_publisher + "','" + id_category + "','" + year_publish + "','" + price + "',N'" + description + "',N'" + image + "','" + createdAt + "')";
+            string sql = "insert into Books(name,author,id_publisher,id_category,year_publish,price,description,image, quantity,createdAt) values(N'" + name + "',N'" + author + "','" + id_publisher + "','" + id_category + "','" + year_publish + "','" + price + "',N'" + description + "',N'" + image + "','" + quantity + "','" + createdAt + "')";
             myDb.Database.ExecuteSqlCommand(sql);
         }
         public void delete(int id_book)
@@ -38,11 +38,11 @@ namespace LibraryAsp.Dao
             return myDb.books.Where(x => x.id_book == id_book).SingleOrDefault();
         }
 
-        public void update(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, int id_book)
+        public void update(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, int quantity, int id_book)
         {
             
             string sql = @"update dbo.Books set [name] = @name, author = @author , id_category = @id_cat,
-                    id_publisher = @id_pub, year_publish = @year, price = @price, [description] = @descrip 
+                    id_publisher = @id_pub, year_publish = @year, price = @price, [description] = @descrip, quantity = @quantity 
                     where id_book = @id_book
                     ";
 
@@ -53,6 +53,7 @@ namespace LibraryAsp.Dao
                 new SqlParameter("@year", year_publish),
                 new SqlParameter("@price", price),
                 new SqlParameter("@descrip", description),
+                new SqlParameter("@quantity",quantity),
                 new SqlParameter("@id_book", id_book)
                 );
         }

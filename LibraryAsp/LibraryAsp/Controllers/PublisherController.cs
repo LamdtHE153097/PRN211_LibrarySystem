@@ -14,9 +14,16 @@ namespace LibraryAsp.Controllers
         // GET: Publisher
         public ActionResult Index(string msg)
         {
-            ViewBag.Msg = msg;
-            ViewBag.List = publisher.getAll();
-            return View();
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.Msg = msg;
+                ViewBag.List = publisher.getAll();
+                return View();
+            }else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
         [HttpPost]
         public ActionResult Add(FormCollection form)

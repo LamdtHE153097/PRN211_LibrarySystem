@@ -14,10 +14,16 @@ namespace LibraryAsp.Controllers
         // GET: Book
         public ActionResult Index(string msg)
         {
-
-            ViewBag.Msg = msg;
-            ViewBag.List = book.getAll();
-            return View();
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.Msg = msg;
+                ViewBag.List = book.getAll();
+                return View();
+            } else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
         
         // Add modal form
@@ -38,8 +44,9 @@ namespace LibraryAsp.Controllers
             var name = form["name"];
             var author = form["author"];
             var description = form["noidung"];
+            var quantity = Int32.Parse(form["quantity"]);
             DateTime createdAt = DateTime.Now;
-            book.add(name, author, nxb, loaisach, year, price, description, postedFileName, createdAt);
+            book.add(name, author, nxb, loaisach, year, price, description, postedFileName, quantity, createdAt);
             return RedirectToAction("Index", new { msg = "1" });
         }
 
@@ -55,8 +62,9 @@ namespace LibraryAsp.Controllers
             var author = form["author"];
             var description = form["noidung"];
             var bookid = Int32.Parse(form["id_book"]);
+            var quantity = Int32.Parse(form["quantity"]);
 
-            book.update(name,author,nxb,loaisach,year,price,description,bookid);
+            book.update(name,author,nxb,loaisach,year,price,description,quantity,bookid);
             return RedirectToAction("Index", new { msg = "1" });
         }
 

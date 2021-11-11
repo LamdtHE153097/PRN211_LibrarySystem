@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 
 namespace LibraryAsp.Dao
 {
@@ -44,6 +45,12 @@ namespace LibraryAsp.Dao
             var obj = getTransaction(id);
             obj.status = status;
             myDb.SaveChanges();
+        }
+        public void autoPunish(int id_transac)
+        {
+            string sql = @"update Transactions set [status] = @status where id_transaction = @id_transac";
+            myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@status", 4),
+                new SqlParameter("@id_transac", id_transac));
         }
     }
 }

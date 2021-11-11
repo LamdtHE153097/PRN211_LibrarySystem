@@ -167,7 +167,10 @@
                                                     <div class="">
                                                         <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Ngày thêm</label>
                                                         : @item.createdAt
-
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Số lượng trong kho</label>
+                                                        : @item.quantity
                                                     </div>
                                                 </div>
                                                 <div class="">
@@ -249,7 +252,7 @@
                                                                     @foreach (var item1 in cateNew)
                                                                     {
                                                                         <option value="@item1.id_category">@item1.name</option>
-                                                                        if(item1.id_category == item.id_category)
+                                                                        if (item1.id_category == item.id_category)
                                                                         {
                                                                             <option value="@item.id_category">@item.name</option>
                                                                         }
@@ -273,7 +276,14 @@
                                                                 <input class="form-control" type="text" id="price" name="price" value="@item.price">
                                                             </div>
                                                         </div>
-
+                                                        <div class="row mb-2">
+                                                            <div class="col-4">
+                                                                <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Số lượng trong kho: </label>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <input class="form-control" type="text" id="quantity" name="quantity" value="@item.quantity">
+                                                            </div>
+                                                        </div>
                                                         <input class="form-control" type="hidden" id="id_book" name="id_book" value="@item.id_book" hidden>
                                                     </div>
                                                 </div>
@@ -400,6 +410,11 @@
                         <div class="mb-3">
                             <label for="exampleFormControlFile1">Ảnh:</label>
                             <input type="file" class="form-control-file mt-2" name="file" id="file" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-film"
+                                   class="col-form-label">Số lượng: </label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" required>
                         </div>
                         <div class="mb-3">
                             <label for="category-film"

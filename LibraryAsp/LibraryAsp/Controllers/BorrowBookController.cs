@@ -16,16 +16,18 @@ namespace LibraryAsp.Controllers
         CategoryDao categoryDao = new CategoryDao();
         TransactionDao transactionDao = new TransactionDao();
         AuthenticationDao authenticationDao = new AuthenticationDao();
-
+        LibraryDbContext context = new LibraryDbContext();
         // GET: BorrowBook
         public ActionResult Index(string mess)
         {
+            var query = context.categories.Select(c => new { c.id_category, c.name });
             var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
             if (userInfomatiom.Role.id_role == 1)
             {
                 ViewBag.listP = publisherDao.getAll();
                 ViewBag.listC = categoryDao.getAll();
                 ViewBag.list = bookDao.getAll();
+                ViewBag.listTest = new SelectList(query.AsEnumerable(), "id_category", "name");
                 ViewBag.mes = mess;
                 return View();
             }
@@ -34,6 +36,31 @@ namespace LibraryAsp.Controllers
                 return RedirectToAction("Error", "Home");
             }
          }
+
+        [HttpPost]
+        public ActionResult Index (Category category)
+        {
+            if (category.id_category != 0)
+            {
+                var query = context.categories.Select(c => new { c.id_category, c.name });
+                ViewBag.listP = publisherDao.getAll();
+                ViewBag.listC = categoryDao.getAll();
+                ViewBag.list = context.books.Where(p => p.id_category == category.id_category).ToList();
+                ViewBag.listTest = new SelectList(query.AsEnumerable(), "id_category", "name");
+                return View();
+            } else
+            {
+                var query = context.categories.Select(c => new { c.id_category, c.name });
+                ViewBag.listP = publisherDao.getAll();
+                ViewBag.listC = categoryDao.getAll();
+                ViewBag.list = bookDao.getAll();
+                ViewBag.listTest = new SelectList(query.AsEnumerable(), "id_category", "name");
+                return View();
+                //string mess = "1";
+                //return RedirectToAction("Index", new { mess });
+            }
+
+        }
 
         [HttpPost]
         public ActionResult Add(FormCollection form)
@@ -94,11 +121,32 @@ namespace LibraryAsp.Controllers
 
         public ActionResult ListTransaction(string mess)
         {
-            ViewBag.mes = mess;
-            ViewBag.listUser = authenticationDao.getAll();
-            ViewBag.listBook = bookDao.getAll();
-            ViewBag.list = transactionDao.getTransaction();
-            return View();
+            DateTime dateNow = DateTime.Now;
+            List<Transaction> transactions = transactionDao.getTransaction();
+            foreach(var item in transactions)
+            {
+                TimeSpan ts = item.end_time - item.start_time;
+                int differenceInDays = ts.Days;
+                TimeSpan tsNow = dateNow - item.start_time;
+                if((tsNow.Days >= differenceInDays) && item.status == 2)
+                {
+                    // update item to punish
+                    transactionDao.autoPunish(item.id_transaction);
+                }
+            }
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.mes = mess;
+                ViewBag.listUser = authenticationDao.getAll();
+                ViewBag.listBook = bookDao.getAll();
+                ViewBag.list = transactionDao.getTransaction();
+                return View();
+            } else
+            {
+                return RedirectToAction("Error", "Home");
+            }
+                
         }
 //1: Chờ duyệt 
 //2: Đang thuê 
@@ -108,11 +156,15 @@ namespace LibraryAsp.Controllers
         {
             transactionDao.updateStatus(status, id);
             var transaction = transactionDao.getTransaction(id);
-            if(status == 2)
+            Book book = bookDao.getOneBook(transaction.id_book);
+            if (status == 2)
             {
-                Book book = bookDao.getOneBook(transaction.id_book);
                 bookDao.editQuantity(book.id_book, book.quantity - 1);
+            } else if(status == 3)
+            {
+                bookDao.editQuantity(book.id_book, book.quantity + 1);
             }
+
             return RedirectToAction("ListTransaction", new { mess = "1" });
         }
     }

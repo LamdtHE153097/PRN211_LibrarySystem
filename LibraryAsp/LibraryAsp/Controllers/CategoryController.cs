@@ -15,9 +15,16 @@ namespace LibraryAsp.Controllers
         // GET: Category
         public ActionResult Index(string msg)
         {
-            ViewBag.Msg = msg;
-            ViewBag.List = category.getAll();
-            return View();
+            var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
+            if (userInfomatiom.Role.id_role == 2)
+            {
+                ViewBag.Msg = msg;
+                ViewBag.List = category.getAll();
+                return View();
+            } else
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
         [HttpPost]
         public ActionResult Add(FormCollection form)
