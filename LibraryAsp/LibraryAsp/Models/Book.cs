@@ -38,6 +38,7 @@ namespace LibraryAsp.Models
 
         public DateTime createdAt { get; set; }
 
+        public int quantity { get; set; }
         public virtual Publisher Publisher { get; set; }
 
         public virtual Category Category { get; set; }

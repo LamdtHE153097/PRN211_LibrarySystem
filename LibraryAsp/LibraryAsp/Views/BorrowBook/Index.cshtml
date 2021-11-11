@@ -6,14 +6,14 @@
 
 <main>
     @{ var userInfomatiom = (LibraryAsp.Models.User)Session["USER"]; }
-    @{string dtnoww = DateTime.Today.ToString("yyyy-MM-dd"); }
+    @{string dtnoww = DateTime.Today.ToString("dd-MM-yyyy"); }
     <div class="container-fluid px-4">
         @if (ViewBag.mes != null)
         {
             if (ViewBag.mes == "1")
             {
                 <div class="alert alert-success">
-                    <strong>Thuê sách thành công</strong>
+                    <strong>Thành công, vui lòng chờ duyệt</strong>
                 </div>
             }
             else
@@ -29,7 +29,7 @@
 
                 var itemName = "#exampleModalss" + item.id_book;
                 var itemName1 = "exampleModalss" + item.id_book;
-                <div class="movies-box" style="height: 400px;width: 250px; display: flex; justify-content: space-between; align-items: center; flex-direction: column; box-shadow: 2px 2px 30px rgb(0 0 0 / 20%); margin: 20px; border-radius: 5px; overflow: hidden; border-top: 3px solid #292929;">
+                <div class="movies-box" style="height: 430px;width: 250px; display: flex; justify-content: space-between; align-items: center; flex-direction: column; box-shadow: 2px 2px 30px rgb(0 0 0 / 20%); margin: 20px; border-radius: 5px; overflow: hidden; border-top: 3px solid #292929;">
                     <!--img------------>
                     <a href="#">
                         <div class="movies-img">
@@ -37,13 +37,22 @@
                             <img src="/Content/assets/img/@item.image" style=" width: 250px; height: 300px; object-fit: cover;" />
                         </div>
                     </a>
-                    <p style="margin-bottom:-10px;margin-top:10px;font-weight:bold">@item.name</p>
-                    <div style="margin-top:20px;margin-bottom:20px" class="button--movie">
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="@itemName">Thuê sách</button>
+                    <h3 style="font-weight:bold">@item.name</h3>
+                    <p>Số lượng còn lại: @item.quantity</p>
+                    @if (item.quantity != 0)
+                    {
+                    <div style="margin-bottom:20px" class="button--movie">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="@itemName">Thuê sách</button>
                     </div>
+                    } else
+                    {
+                    <div style="margin-bottom:20px" class="button--movie">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" value="Disabled">Hết sách</button>
+                    </div>
+                    }
                 </div>
-
-                <form action="/BorrowBook/add" method="post">
+                
+                <form action="/BorrowBook/Add" method="post">
                     <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">

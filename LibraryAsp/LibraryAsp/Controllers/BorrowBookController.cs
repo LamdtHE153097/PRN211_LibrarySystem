@@ -36,7 +36,7 @@ namespace LibraryAsp.Controllers
          }
 
         [HttpPost]
-        public ActionResult add(FormCollection form)
+        public ActionResult Add(FormCollection form)
         {
             Transaction transaction = new Transaction();
             transaction.id_user = Int32.Parse(form["idUser"]);
@@ -100,10 +100,19 @@ namespace LibraryAsp.Controllers
             ViewBag.list = transactionDao.getTransaction();
             return View();
         }
-
+//1: Chờ duyệt 
+//2: Đang thuê 
+//3: Đã trả
+//4: Bị phạt
         public ActionResult changeStatus(int id, int status)
         {
             transactionDao.updateStatus(status, id);
+            var transaction = transactionDao.getTransaction(id);
+            if(status == 2)
+            {
+                Book book = bookDao.getOneBook(transaction.id_book);
+                bookDao.editQuantity(book.id_book, book.quantity - 1);
+            }
             return RedirectToAction("ListTransaction", new { mess = "1" });
         }
     }

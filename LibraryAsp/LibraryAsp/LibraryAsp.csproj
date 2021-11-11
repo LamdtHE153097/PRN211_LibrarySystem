@@ -314,6 +314,10 @@
     <Compile Include="Migrations\202110310400028_Add posts model.designer.cs">
       <DependentUpon>202110310400028_Add posts model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111101254066_Quantity book.cs" />
+    <Compile Include="Migrations\202111101254066_Quantity book.designer.cs">
+      <DependentUpon>202111101254066_Quantity book.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
@@ -516,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110310400028_Add posts model.resx">
       <DependentUpon>202110310400028_Add posts model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111101254066_Quantity book.resx">
+      <DependentUpon>202111101254066_Quantity book.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

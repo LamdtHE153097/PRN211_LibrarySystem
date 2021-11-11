@@ -356,3 +356,4 @@ C:\Users\Trung Ducc\Documents\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Deb
 C:\Users\Trung Ducc\Documents\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.csproj.CopyComplete
 C:\Users\Trung Ducc\Documents\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.dll
 C:\Users\Trung Ducc\Documents\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.pdb
+C:\Users\Trung Ducc\Documents\PRN211_LibrarySystem\LibraryAsp\LibraryAsp\obj\Debug\LibraryAsp.Migrations.Quantitybook.resources

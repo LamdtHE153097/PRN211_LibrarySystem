@@ -33,6 +33,11 @@ namespace LibraryAsp.Dao
             myDb.SaveChanges();
         }
 
+        public Book getOneBook(int id_book)
+        {
+            return myDb.books.Where(x => x.id_book == id_book).SingleOrDefault();
+        }
+
         public void update(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, int id_book)
         {
             
@@ -50,6 +55,13 @@ namespace LibraryAsp.Dao
                 new SqlParameter("@descrip", description),
                 new SqlParameter("@id_book", id_book)
                 );
+        }
+
+        public void editQuantity(int id_book, int quantityNew)
+        {
+            string sql = @"update dbo.Books set quantity = @quantity where id_book = @id_book";
+            myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@quantity", quantityNew)
+                , new SqlParameter("id_book", id_book));
         }
     }
 }
