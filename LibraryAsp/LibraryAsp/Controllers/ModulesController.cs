@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryAsp.Dao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,15 @@ namespace LibraryAsp.Controllers
         [ChildActionOnly]
         public ActionResult Header()
         {
+            BookDao bookDao = new BookDao();
+            AuthenticationDao authenticationDao = new AuthenticationDao();
+            var listUser = authenticationDao.getAll();
+            ViewBag.listUser = listUser;
+            var listBook = bookDao.getAll();
+            ViewBag.listBook = listBook;
+            TransactionDao dao = new TransactionDao();
+            var noti = dao.getFiveNoti();
+            ViewBag.a = noti;
             return PartialView();
         }
 

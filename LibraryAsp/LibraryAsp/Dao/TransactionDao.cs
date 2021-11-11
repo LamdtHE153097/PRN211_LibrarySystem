@@ -15,7 +15,10 @@ namespace LibraryAsp.Dao
             myDb.transactions.Add(transaction);
             myDb.SaveChanges();
         }
-
+        public List<Transaction> getFiveNoti()
+        {
+            return myDb.transactions.OrderByDescending(p => p.id_transaction).Where(t => t.status==1).Take(5).ToList();
+        }
         public Transaction checkExistTransaction(int userId, int bookId)
         {
             return myDb.transactions.Where(t => t.id_user == userId && t.id_book == bookId && t.status != 3 ).FirstOrDefault();
