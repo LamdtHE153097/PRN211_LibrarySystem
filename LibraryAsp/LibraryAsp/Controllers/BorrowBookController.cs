@@ -123,7 +123,12 @@ namespace LibraryAsp.Controllers
         {
             DateTime dateNow = DateTime.Now;
             List<Transaction> transactions = transactionDao.getTransaction();
-            foreach(var item in transactions)
+
+            //Phuong
+            var listUser = authenticationDao.getAll();
+            var listBook = bookDao.getAll();
+
+            foreach (var item in transactions)
             {
                 TimeSpan ts = item.end_time - item.start_time;
                 int differenceInDays = ts.Days;
@@ -132,6 +137,30 @@ namespace LibraryAsp.Controllers
                 {
                     // update item to punish
                     transactionDao.autoPunish(item.id_transaction);
+                    //get user Fullname and book name for email
+                    string email = "";
+                    string name = "";
+                    string book = "";
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/assets/img/a.html"));
+                    foreach (var u in listUser)
+                    {
+                        if (item.id_user.Equals(u.id_user))
+                        {
+                            name = u.fullname;
+                            email = u.email;
+                        }
+                    }
+                    foreach (var u in listBook)
+                    {
+                        if (item.id_book.Equals(u.id_book))
+                        {
+                            book = u.name;
+                        }
+                    }
+                    content = content.Replace("{{name}}", name);
+                    content = content.Replace("{{book}}", book);
+                    new SendEmail().SendingEmail(email, "Thông báo phạt", content);
+                    //end send mail
                 }
             }
             var userInfomatiom = (LibraryAsp.Models.User)Session["USER"];
