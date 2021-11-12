@@ -6,7 +6,7 @@
 
 <main>
     @{ var userInfomatiom = (LibraryAsp.Models.User)Session["USER"]; }
-    @{string dtnoww = DateTime.Today.ToString("dd-MM-yyyy"); }
+   
     <div class="container-fluid px-4">
         @if (ViewBag.mes != null)
         {
@@ -17,11 +17,11 @@
                 </div>
             }
             @*else
-            {
-                <div class="alert alert-danger">
-                    <strong>Bạn đã thuê sách này</strong>
-                </div>
-            }*@
+                {
+                    <div class="alert alert-danger">
+                        <strong>Bạn đã thuê sách này</strong>
+                    </div>
+                }*@
         }
 
         @*@using (Html.BeginForm("Index", "BorrowBook", FormMethod.Post, new { name = "demoForm" }))
@@ -58,108 +58,112 @@
                             </div>
                         }
                     </div>
-                        <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
-                                @*<form action="/BorrowBook/Add" method="post">*@
-                                    <div class="modal-content">
-                                        <form action="/BorrowBook/Add" method="post">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">@item.name</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div id="resultss" class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <div class="movies-img">
-
-                                                            <img src="/Content/assets/img/@item.image" style=" width: 300px; height: 400px; object-fit: cover;" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <h5>Thông tin sách</h5>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách</label>
-                                                            : @item.name
-                                                        </div>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả</label>
-                                                            : @item.author
-                                                        </div>
-
-
-                                                        @foreach (var item1 in ViewBag.listP)
-                                                        {
-                                                            if (item1.id_publisher == item.id_publisher)
-                                                            {
-                                                                <div class="">
-                                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên nhà xuất bản</label>
-                                                                    : @item1.name
-                                                                </div>
-                                                            }
-                                                        }
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm xuất bản</label>
-                                                            : @item.year_publish
-                                                        </div>
-                                                        @foreach (var item2 in ViewBag.listC)
-                                                        {
-                                                            if (item2.id_category == item.id_category)
-                                                            {
-                                                                <div class="">
-                                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên thể loại</label>
-                                                                    : @item2.name
-                                                                </div>
-                                                            }
-                                                        }
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Price</label>
-                                                            : @item.price VND
-                                                        </div>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Mô tả:</label>
-                                                            <br> @item.description
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <h5>Thông tin sinh viên</h5>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sinh viên:</label>
-                                                            : @userInfomatiom.fullname
-                                                        </div>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Địa chỉ:</label>
-                                                            : @userInfomatiom.address
-                                                        </div>
-                                                        <div class="">
-                                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Số điện thoại:</label>
-                                                            : @userInfomatiom.phone
-                                                        </div>
-                                                        <label for="category-film" class="col-form-label">Ngày thuê :</label>
-                                                        <input type="date" class="form-control" id="tenphim" name="start_time" tabindex="1" min="@dtnoww" required>
-                                                        <label for="category-film" class="col-form-label">Ngày trả :</label>
-                                                        <input type="date" class="form-control" name="end_time" tabindex="1" value="" min="@dtnoww" required>
-                                                        <input type="hidden" class="form-control" name="idUser" tabindex="1" value="@userInfomatiom.id_user" hidden>
-                                                        <input type="hidden" class="form-control" name="idBook" tabindex="1" value="@item.id_book" hidden>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button style="width:100px" type="submit" class="btn btn-primary">Thuê</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                @*</form>*@
+                    <div class="modal fade" id="@itemName1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                    <form action="/BorrowBook/Add" method="post">
+                    <div class="modal-content">
+                        <form action="/BorrowBook/Add" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">@item.name</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </div>
+                            <div id="resultss" class="modal-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="movies-img">
+
+                                            <img src="/Content/assets/img/@item.image" style=" width: 300px; height: 400px; object-fit: cover;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>Thông tin sách</h5>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sách</label>
+                                            : @item.name
+                                        </div>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tác giả</label>
+                                            : @item.author
+                                        </div>
+
+
+                                        @foreach (var item1 in ViewBag.listP)
+                                        {
+                                            if (item1.id_publisher == item.id_publisher)
+                                            {
+                                                <div class="">
+                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên nhà xuất bản</label>
+                                                    : @item1.name
+                                                </div>
+                                            }
+                                        }
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Năm xuất bản</label>
+                                            : @item.year_publish
+                                        </div>
+                                        @foreach (var item2 in ViewBag.listC)
+                                        {
+                                            if (item2.id_category == item.id_category)
+                                            {
+                                                <div class="">
+                                                    <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên thể loại</label>
+                                                    : @item2.name
+                                                </div>
+                                            }
+                                        }
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Price</label>
+                                            : @item.price VND
+                                        </div>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Mô tả:</label>
+                                            <br> @item.description
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>Thông tin sinh viên</h5>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Tên sinh viên:</label>
+                                            : @userInfomatiom.fullname
+                                        </div>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Địa chỉ:</label>
+                                            : @userInfomatiom.address
+                                        </div>
+                                        <div class="">
+                                            <label for="category-film" class="col-form-label" style="font-weight:bold;width : 140px">Số điện thoại:</label>
+                                            : @userInfomatiom.phone
+                                        </div>
+                                         @{string dtmin = DateTime.Today.ToString("yyyy-MM-dd"); }
+                                        <label for="category-film" class="col-form-label">Ngày thuê :</label>
+                                        <input type="date" class="form-control" id="tenphim" name="start_time" tabindex="1" min="@dtmin" required>
+                                        <label for="category-film" class="col-form-label">Ngày trả :</label>
+                                        <input type="date" class="form-control" name="end_time" tabindex="1" value="" min="@dtmin" required>
+                                        <input type="hidden" class="form-control" name="idUser" tabindex="1" value="@userInfomatiom.id_user" hidden>
+                                        <input type="hidden" class="form-control" name="idBook" tabindex="1" value="@item.id_book" hidden>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button style="width:100px" type="submit" class="btn btn-primary">Thuê</button>
+                            </div>
+                        </form>
+                    </div>
+                    </form>
+                    </div>
+                    </div>
                 }
 
             </div>
 
-        @*}*@
+       @* }*@
 
     </div>
 </main>
+
+
+
 
 <script type="text/javascript">
     function SelectedIndexChanged() {

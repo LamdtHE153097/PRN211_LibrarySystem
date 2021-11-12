@@ -26,43 +26,45 @@
     </form>
     <!-- Navbar-->
     <!-- Notification-->
-    <ul style="color:white" class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    @if (userInfomatiom.Role.id_role != 1)
+    {
+<ul style="color:white" class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 
-        <li class="nav-item dropdown">
+    <li class="nav-item dropdown">
 
-            <a style="color:white" class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
-               aria-expanded="false"><i class="fas fa-bell"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <a style="color:white" class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+           aria-expanded="false"><i class="fas fa-bell"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
-                
-                @foreach (var a in ViewBag.a)
-                {
-                    <li>
-                        <a class="dropdown-item" href="/BorrowBook/ListTransaction">
-                            <div class="sb-nav-link-icon">
-                                <i class="fas fa-edit"></i>
-                                @foreach (var u in ViewBag.listUser)
+            @foreach (var a in ViewBag.a)
+            {
+                <li>
+                    <a class="dropdown-item" href="/BorrowBook/ListTransaction">
+                        <div class="sb-nav-link-icon">
+                            <i class="fas fa-edit"></i>
+                            @foreach (var u in ViewBag.listUser)
+                            {
+                                if (a.id_user.Equals(u.id_user))
                                 {
-                                    if (a.id_user.Equals(u.id_user))
-                                    {
-                                        @u.fullname;
-                                    }
-                                } vừa đăng ký thuê sách
-                                @foreach (var u in ViewBag.listBook)
-                                {
-                                    if (a.id_book.Equals(u.id_book))
-                                    {
-                                        @u.name;
-                                    }
+                                    @u.fullname;
                                 }
-                            </div>
-                        </a>
-                    </li>
-                }
+                            } vừa đăng ký thuê sách
+                            @foreach (var u in ViewBag.listBook)
+                            {
+                                if (a.id_book.Equals(u.id_book))
+                                {
+                                    @u.name;
+                                }
+                            }
+                        </div>
+                    </a>
+                </li>
+            }
 
-            </ul>
-        </li>
-    </ul>
+        </ul>
+    </li>
+</ul>
+    }
     <!-- user dropdown list-->
     <ul style="color:white" class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 
