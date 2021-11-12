@@ -23,8 +23,8 @@ namespace LibraryAsp.Dao
         }
         public void add(string name, string author, int id_publisher, int id_category, int year_publish, float price, string description, string image, int quantity,DateTime createdAt)
         {
-            string sql = "insert into Books(name,author,id_publisher,id_category,year_publish,price,description,image,createdAt) " +
-               "values(@name,@author,@publisher,@category,@year,@price,@des,@image,@create)";
+            string sql = "insert into Books(name,author,id_publisher,id_category,year_publish,price,description,image,createdAt, quantity) " +
+               "values(@name,@author,@publisher,@category,@year,@price,@des,@image,@create,@quantity)";
             myDb.Database.ExecuteSqlCommand(sql, new SqlParameter("@name", name),
                 new SqlParameter("@author", author),
                 new SqlParameter("@publisher", id_publisher),
@@ -33,7 +33,8 @@ namespace LibraryAsp.Dao
                 new SqlParameter("@price", price),
                 new SqlParameter("@des", description),
                 new SqlParameter("@image", image),
-                new SqlParameter("@create", createdAt)
+                new SqlParameter("@create", createdAt),
+                new SqlParameter("@quantity", quantity)
                 );
         }
         public void delete(int id_book)
